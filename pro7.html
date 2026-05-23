@@ -661,6 +661,163 @@
   </style>  
 </head>  
 <body>  
+  <!-- TECH FORCE LOADER -->
+
+<div id="loader">
+
+  <img 
+  src="https://res.cloudinary.com/ds81x9uqr/image/upload/q_auto/f_auto/v1779530962/Loading_Dots_In_Yellow_2_drzyse.gif" 
+  class="loader-gif" 
+  alt="Loading">
+
+  <div class="loading-text">
+    LOADING...
+  </div>
+
+</div>
+
+<style>
+
+/* LOADER */
+
+#loader{
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+
+  z-index:99999;
+
+  overflow:hidden;
+
+  background:
+  rgba(5,5,5,.45);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  transition:.8s;
+}
+
+/* OVERLAY */
+
+#loader::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(
+  circle at center,
+  rgba(0,255,229,.08),
+  rgba(0,0,0,.65)
+  );
+
+  z-index:-2;
+}
+
+/* GLOW BORDER */
+
+#loader::before{
+  content:"";
+
+  position:absolute;
+  inset:18px;
+
+  border-radius:35px;
+
+  border:2px solid rgba(0,255,229,.35);
+
+  box-shadow:
+  0 0 25px rgba(0,255,229,.35),
+  inset 0 0 25px rgba(255,255,255,.03);
+
+  animation:borderGlow 4s linear infinite;
+}
+
+/* GIF */
+
+.loader-gif{
+  width:120px;
+  height:120px;
+
+  object-fit:contain;
+
+  filter:
+  drop-shadow(0 0 25px #ffd000);
+}
+
+/* TEXT */
+
+.loading-text{
+  margin-top:18px;
+
+  color:white;
+
+  font-size:13px;
+
+  letter-spacing:5px;
+
+  text-transform:uppercase;
+
+  text-shadow:
+  0 0 12px #00ffe5;
+
+  animation:textBlink 1.5s infinite;
+}
+
+/* ANIMATIONS */
+
+@keyframes borderGlow{
+
+  0%{
+    filter:hue-rotate(0deg);
+  }
+
+  100%{
+    filter:hue-rotate(360deg);
+  }
+}
+
+@keyframes textBlink{
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.4;
+  }
+}
+
+/* HIDE */
+
+.hide-loader{
+  opacity:0;
+  visibility:hidden;
+}
+
+</style>
+
+<script>
+
+window.addEventListener("load",()=>{
+
+  setTimeout(()=>{
+
+    document
+    .getElementById("loader")
+    .classList.add("hide-loader");
+
+  },3000);
+
+});
+
+</script>
 
 <!-- ========== 2. MENU HTML (Sidebar + Overlay + Toggle Button) ========== -->
 <!-- MENU BUTTON -->
