@@ -16,6 +16,129 @@
   
   <!-- 3. CSS Styles including menu styles -->
   <style>
+    /* LOADER */
+
+#loader{
+  position:fixed;
+  inset:0;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+
+  z-index:99999;
+
+  overflow:hidden;
+
+  /* BLUR GLASS BG */
+  background:
+  rgba(5,5,5,.45);
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  transition:.8s;
+}
+
+/* EXTRA DARK OVERLAY */
+
+#loader::after{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+  radial-gradient(
+  circle at center,
+  rgba(0,255,229,.08),
+  rgba(0,0,0,.65)
+  );
+
+  z-index:-2;
+}
+
+/* GLOW BORDER */
+
+#loader::before{
+  content:"";
+
+  position:absolute;
+  inset:18px;
+
+  border-radius:35px;
+
+  border:2px solid rgba(0,255,229,.35);
+
+  box-shadow:
+  0 0 25px rgba(0,255,229,.35),
+  inset 0 0 25px rgba(255,255,255,.03);
+
+  animation:borderGlow 4s linear infinite;
+}
+
+/* GIF */
+
+.loader-gif{
+  width:120px;
+  height:120px;
+
+  object-fit:contain;
+
+  filter:
+  drop-shadow(0 0 25px #00ffe5);
+}
+
+/* TEXT */
+
+.loading-text{
+  margin-top:22px;
+
+  color:white;
+
+  font-size:14px;
+
+  letter-spacing:5px;
+
+  text-transform:uppercase;
+
+  text-shadow:
+  0 0 12px #00ffe5;
+
+  animation:textBlink 1.5s infinite;
+}
+
+/* ANIMATION */
+
+@keyframes borderGlow{
+
+  0%{
+    filter:hue-rotate(0deg);
+  }
+
+  100%{
+    filter:hue-rotate(360deg);
+  }
+}
+
+@keyframes textBlink{
+
+  0%,100%{
+    opacity:1;
+  }
+
+  50%{
+    opacity:.4;
+  }
+}
+
+/* HIDE */
+
+.hide-loader{
+  opacity:0;
+  visibility:hidden;
+}
     * {
       margin: 0;
       padding: 0;
@@ -228,92 +351,6 @@
       list-style: none;
       font-weight: 600;
     }
-    #loader {
-  position: fixed;
-  inset: 0;
-  background: #080808;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #00ffd5;
-  z-index: 99999;
-  font-family: Arial, sans-serif;
-}
-
-.cart {
-  position: relative;
-  width: 140px;
-  height: 100px;
-  animation: shake 1.4s infinite;
-}
-
-.basket {
-  position: absolute;
-  width: 100px;
-  height: 45px;
-  border: 5px solid #00ffd5;
-  border-top: none;
-  bottom: 28px;
-  left: 20px;
-  animation: breakBuild 2.5s infinite;
-}
-
-.box {
-  position: absolute;
-  width: 35px;
-  height: 35px;
-  background: #ffcc00;
-  top: 0;
-  left: 50px;
-  animation: fallBox 2.5s infinite;
-}
-
-.wheel {
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border: 4px solid #00ffd5;
-  border-radius: 50%;
-  bottom: 0;
-  animation: wheelMove 2.5s infinite;
-}
-
-.w1 { left: 28px; }
-.w2 { left: 88px; }
-
-#loader h2 {
-  margin-top: 25px;
-  font-size: 18px;
-  letter-spacing: 2px;
-}
-
-@keyframes fallBox {
-  0% { transform: translateY(-80px) rotate(0deg); opacity: 0; }
-  30% { transform: translateY(0) rotate(360deg); opacity: 1; }
-  55% { transform: translateY(0) rotate(360deg); }
-  75% { transform: translateY(90px) rotate(720deg); opacity: 0; }
-  100% { transform: translateY(-80px); opacity: 0; }
-}
-
-@keyframes breakBuild {
-  0%, 25% { transform: scale(1) rotate(0deg); opacity: 1; }
-  50% { transform: scale(1.2) rotate(8deg); opacity: 1; }
-  70% { transform: scale(0.2) rotate(-25deg); opacity: 0; }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
-}
-
-@keyframes wheelMove {
-  0%, 30% { transform: translateY(0); opacity: 1; }
-  60% { transform: translateY(40px) rotate(360deg); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  40% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-}
     .nav-links-top a {
       text-decoration: none;
       color: #5a3b1e;
@@ -650,14 +687,17 @@
   </style>
 </head>
 <body>
+<!-- LOADER -->
 <div id="loader">
-  <div class="cart">
-    <div class="box"></div>
-    <div class="basket"></div>
-    <div class="wheel w1"></div>
-    <div class="wheel w2"></div>
+
+  <!-- GIF -->
+  <img src="https://res.cloudinary.com/ds81x9uqr/image/upload/v1779529530/Welcome_irvhmr.gif" class="loader-gif" alt="Loading">
+
+  <!-- TEXT -->
+  <div class="loading-text">
+    LOADING...
   </div>
-  <h2>Building your cart...</h2>
+
 </div>
 <!-- ========== 2. MENU HTML (Sidebar + Overlay + Toggle Button) ========== -->
 <!-- MENU BUTTON -->
@@ -735,7 +775,7 @@
   <div class="nav-container">
     <div class="logo">Tech Force</div>
     <ul class="nav-links-top">
-      <li><a href="index.html">Home</a></li><li><a href="sidebar">Shop</a></li><li><a href="pro1.html">Offer</a></li><li><a href="https://tally.so/r/jaJbZ9">Contact</a></li>
+      <li><a href="pro4.html">Home</a></li><li><a href="pro3.html">Shop</a></li><li><a href="pro1.html">Offer</a></li><li><a href="https://tally.so/r/jaJbZ9">Contact</a></li>
     </ul>
     <div class="nav-icons">
       <i class="fas fa-search"></i>
@@ -964,12 +1004,21 @@
   document.querySelectorAll('.view-offer').forEach(btn => {
     btn.addEventListener('click', (e) => { e.preventDefault(); showCartToast("✨ Limited deal — grab soon!"); });
   });
-</script><script>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("loader").style.display = "none";
-    }, 2500);
-  });
+</script>
+  <script>
+
+window.addEventListener("load",()=>{
+
+  setTimeout(()=>{
+
+    document
+    .getElementById("loader")
+    .classList.add("hide-loader");
+
+  },3000);
+
+});
+
 </script>
 </body>
 </html>
