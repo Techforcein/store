@@ -415,98 +415,101 @@
       .thumb { width: 85px; height: 85px; }  
     }  
     @media (max-width: 480px) { .btn-retro { font-size: 0.75rem; } .nav-buttons { gap: 10px; } .nav-btn { padding: 6px 12px; font-size: 0.7rem; } .scroll-notification { bottom: 20px; right: 20px; padding: 8px 16px; font-size: 0.7rem; } }  
+    
+    /* BUY POPUP STYLES (unified) */
+    .buy-popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.75);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      opacity:0;
+      visibility:hidden;
+      transition:.35s cubic-bezier(0.2,0.9,0.4,1.1);
+      z-index:999999;
+    }
+    .buy-popup.show-popup{
+      opacity:1;
+      visibility:visible;
+    }
+    .popup-box{
+      width:92%;
+      max-width:950px;
+      height:88vh;
+      background:#ffffff;
+      border-radius:28px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 0 0 3px rgba(217,108,43,0.3), 0 25px 45px rgba(0,0,0,0.3);
+    }
+    .popup-box iframe{
+      width:100%;
+      height:100%;
+      border:none;
+      background:#fff;
+    }
+    .close-popup{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:50%;
+      background:#d96c2b;
+      color:white;
+      font-size:22px;
+      font-weight:bold;
+      cursor:pointer;
+      z-index:100;
+      transition:.2s ease;
+      box-shadow:0 0 12px rgba(217,108,43,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .close-popup:hover{
+      transform:scale(1.07) rotate(90deg);
+      background:#ff8c42;
+      box-shadow:0 0 18px #ff8c42;
+    }
   </style>  
 </head>  
 <body> 
   <!-- LOADER -->
 <div id="loader">
-
-  <!-- GIF -->
   <img src="https://res.cloudinary.com/ds81x9uqr/image/upload/q_auto/f_auto/v1779530962/Loading_Dots_In_Yellow_2_drzyse.gif" class="loader-gif" alt="Loading">
-
-  <!-- TEXT -->
-  <div class="loading-text">
- 
-  </div>
-
+  <div class="loading-text"> </div>
 </div>
 
-<!-- ========== 2. MENU HTML (Sidebar + Overlay + Toggle Button) ========== -->
-<!-- MENU BUTTON -->
+<!-- ========== MENU HTML ========== -->
 <div class="menu-toggle" id="menuToggle">
   <span></span>
   <span></span>
   <span></span>
 </div>
-
-<!-- BLUR OVERLAY -->
 <div class="overlay" id="overlay"></div>
-
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-
   <ul class="nav-links">
-
-    <li>
-      <a href="pro1.html">
-        <img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="3-in-1 Glow Data Cable">
-        <span>3-in-1 Glow Data Cable</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro2.html">
-        <img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="Wired Headset with Mic">
-        <span>Wired Headset with Mic</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro3.html">
-        <img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="Wired Bass Earphones">
-        <span>Wired Bass Earphones</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro5.html">
-        <img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="Budget Mouse Pad">
-        <span>Budget Mouse Pad</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro6.html">
-        <img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png"  alt="Metal Portable Laptop Stand">
-        <span>Metal Portable Laptop Stand</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro7.html">
-        <img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="Shortcut Keyboard Mat">
-        <span>Shortcut Keyboard Mat</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro8.html">
-        <img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="Wrist S Mouse Pad">
-        <span>Wrist S Mouse Pad</span>
-      </a>
-    </li>
-
+    <li><a href="#"><img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="cable"><span>3-in-1 Glow Data Cable</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="headset"><span>Wired Headset with Mic</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="earphone"><span>Wired Bass Earphones</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="mousepad"><span>Budget Mouse Pad</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png" alt="stand"><span>Metal Portable Laptop Stand</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="keymat"><span>Shortcut Keyboard Mat</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="wristpad"><span>Wrist S Mouse Pad</span></a></li>
   </ul>
-
 </div>
-
 
 <nav class="navbar">  
   <div class="container nav-inner">  
     <div class="logo">Tech Force<span>Gamer's choice</span></div>  
     <div class="nav-buttons">  
-     <a href="pro4.html"> <button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i>Home </button>  </a>
-     <a href="pro4.html"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button>  </a>
+     <a href="#"><button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i>Home </button></a>
+     <a href="#"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button></a>
     </div>  
     <div class="cart-icon"><i class="fas fa-cassette-tape"></i></div>  
   </div>  
@@ -523,13 +526,7 @@
     <div class="details">  
       <h1 class="product-title">Wired Headset with Mic – Noise-Isolating Boom Mic, Stereo Sound for Calls & Gaming</h1>  
       <div class="rating-section">  
-        <div class="stars">  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star-half-alt"></i>  
-        </div>  
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>  
         <div class="rating-score">4.5 / 5</div>  
         <div class="rating-text"><i class="fas fa-users"></i> 1,950+ verified ratings</div>  
       </div>  
@@ -543,19 +540,12 @@
         <button class="btn-retro btn-primary" id="buyNowBtn">🎧 Buy Now</button>  
         <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>  
       </div>  
-      <!-- Description Section -->  
       <div class="offers-card">  
         <div><i class="fas fa-headphones"></i> <strong>🎙️ Product Description</strong></div>  
-        <div style="margin-top: 12px; line-height: 1.6;">  
-          <p>High-quality stereo sound with enhanced voice clarity. Integrated boom mic with noise-isolation for clear calling. Adjustable headband for a comfortable, secure fit. Soft padded earcups provide prolonged wear comfort. Durable construction with tangle-resistant wired connection. Compatible with desktops, laptops, tablets, and select smartphones. Ideal for video conferencing, online classes, gaming, and more. Lightweight design with minimal pressure for extended use.</p>  
-        </div>  
+        <div style="margin-top: 12px; line-height: 1.6;"><p>High-quality stereo sound with enhanced voice clarity. Integrated boom mic with noise-isolation for clear calling. Adjustable headband for a comfortable, secure fit. Soft padded earcups provide prolonged wear comfort. Durable construction with tangle-resistant wired connection. Compatible with desktops, laptops, tablets, and select smartphones. Ideal for video conferencing, online classes, gaming, and more.</p></div>  
       </div>  
-      <!-- Key Features Section -->  
       <div class="offers-card">  
-        <div class="offers-header" id="offersToggle">  
-          <span><i class="fas fa-tape"></i> 🔥 Key Features</span>  
-          <i class="fas fa-chevron-down expand-icon" id="expandIcon"></i>  
-        </div>  
+        <div class="offers-header" id="offersToggle"><span><i class="fas fa-tape"></i> 🔥 Key Features</span><i class="fas fa-chevron-down expand-icon" id="expandIcon"></i></div>  
         <div class="offer-content" id="offerContent">  
           <p><i class="fas fa-check-circle"></i> <strong>High-quality stereo sound</strong> with enhanced voice clarity</p>  
           <p><i class="fas fa-check-circle"></i> <strong>Integrated boom mic with noise-isolation</strong> for clear calling</p>  
@@ -563,11 +553,8 @@
           <p><i class="fas fa-check-circle"></i> <strong>Soft padded earcups</strong> provide prolonged wear comfort</p>  
           <p><i class="fas fa-check-circle"></i> <strong>Durable construction</strong> with tangle-resistant wired connection</p>  
           <p><i class="fas fa-check-circle"></i> <strong>Compatible with desktops, laptops, tablets, and select smartphones</strong></p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Ideal for video conferencing, online classes, gaming, and more</strong></p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Lightweight design</strong> with minimal pressure for extended use</p>  
         </div>  
       </div>  
-      <!-- Specifications Section -->  
       <div class="offers-card" style="margin-top: 0;">  
         <div><i class="fas fa-microchip"></i> <strong>📋 Specifications</strong></div>  
         <div class="specs-grid">  
@@ -577,27 +564,22 @@
           <div class="spec-item"><span class="spec-label">Audio Quality:</span><span class="spec-value">Stereo sound with clear voice output</span></div>  
           <div class="spec-item"><span class="spec-label">Earcups:</span><span class="spec-value">Padded cushions for comfort</span></div>  
           <div class="spec-item"><span class="spec-label">Headband:</span><span class="spec-value">Adjustable and flexible</span></div>  
-          <div class="spec-item"><span class="spec-label">Compatibility:</span><span class="spec-value">Windows/Mac systems, tablets, smartphones (with adapter if needed)</span></div>  
-          <div class="spec-item"><span class="spec-label">Quantity:</span><span class="spec-value">1 Pc (boxed pack)</span></div>  
+          <div class="spec-item"><span class="spec-label">Compatibility:</span><span class="spec-value">Windows/Mac systems, tablets, smartphones</span></div>  
           <div class="spec-item"><span class="spec-label">Country of Origin:</span><span class="spec-value">India</span></div>  
-          <div class="spec-item"><span class="spec-label">GST:</span><span class="spec-value">18%</span></div>  
         </div>  
         <div class="countdown" id="countdownTimer">⏳ Launch sale ends: 23h 59m 59s</div>  
       </div>  
     </div>  
   </div>  
-  <!-- Ideal For Section -->  
   <div class="offers-card fade-up" style="margin: 0 0 24px 0;">  
     <div><i class="fas fa-thumbs-up"></i> <strong>🎯 Ideal For</strong></div>  
     <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px;">  
-      <span class="keyword-tag"><i class="fas fa-home"></i> Work-from-home setups & virtual meetings</span>  
-      <span class="keyword-tag"><i class="fas fa-graduation-cap"></i> Online learning & educational environments</span>  
-      <span class="keyword-tag"><i class="fas fa-headset"></i> Customer support & call center operations</span>  
-      <span class="keyword-tag"><i class="fas fa-gamepad"></i> Gaming, multimedia streaming & casual listening</span>  
-      <span class="keyword-tag"><i class="fas fa-building"></i> Offices, co-working spaces & personal computer desks</span>  
+      <span class="keyword-tag"><i class="fas fa-home"></i> Work-from-home setups</span>  
+      <span class="keyword-tag"><i class="fas fa-graduation-cap"></i> Online learning</span>  
+      <span class="keyword-tag"><i class="fas fa-headset"></i> Call center operations</span>  
+      <span class="keyword-tag"><i class="fas fa-gamepad"></i> Gaming & multimedia</span>  
     </div>  
   </div>  
-  <!-- Highlights Grid -->  
   <div class="highlights-grid fade-up">  
     <div class="hl-item"><i class="fas fa-volume-up"></i><span>Stereo Sound</span></div>  
     <div class="hl-item"><i class="fas fa-microphone-alt"></i><span>Noise-Isolating Mic</span></div>  
@@ -605,54 +587,44 @@
     <div class="hl-item"><i class="fas fa-feather"></i><span>Lightweight</span></div>  
     <div class="hl-item"><i class="fas fa-plug"></i><span>Tangle-Resistant</span></div>  
   </div>  
-  <!-- Keywords Cloud -->  
   <div class="keyword-cloud fade-up">  
-    <span class="keyword-tag">wired headset</span>  
-    <span class="keyword-tag">gaming headset</span>  
-    <span class="keyword-tag">call center headset</span>  
-    <span class="keyword-tag">headphone with mic</span>  
-    <span class="keyword-tag">gaming</span>  
-    <span class="keyword-tag">overhead headset</span>  
-    <span class="keyword-tag">boom mic headset</span>  
-    <span class="keyword-tag">adjustable headphone</span>  
-    <span class="keyword-tag">black wired headset</span>  
+    <span class="keyword-tag">wired headset</span><span class="keyword-tag">gaming headset</span><span class="keyword-tag">call center headset</span><span class="keyword-tag">headphone with mic</span><span class="keyword-tag">boom mic headset</span>  
   </div>  
 </main>  
 <footer>© 2026 Techforce technologies· Wired Headset with Mic | Noise-Isolating Boom Mic | Stereo Sound | Made in India</footer>  
 
-<!-- Scroll to bottom notification popup -->  
-<div class="scroll-notification" id="scrollNotification">  
-  <i class="fas fa-gift"></i> You've reached the end! Get special offer →  
-</div>  
+<div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> You've reached the end! Get special offer →</div>  
+
+<!-- POPUP HTML (unified) -->
+<div class="buy-popup" id="buyPopup">
+  <div class="popup-box">
+    <button class="close-popup" id="closePopup">✕</button>
+    <iframe id="popupFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+</div>
 
 <script>  
-  // Menu Toggle Logic (Step 4)
+  // LOADER FADE
+  window.addEventListener("load", ()=>{
+    setTimeout(()=>{
+      document.getElementById("loader")?.classList.add("hide-loader");
+    }, 1200);
+  });
+
+  // Menu Toggle
   const menuToggle = document.getElementById("menuToggle");
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");
+  menuToggle.onclick = (e) => { e.stopPropagation(); menuToggle.classList.toggle("active"); sidebar.classList.toggle("active"); overlay.classList.toggle("active"); };
+  overlay.onclick = () => { menuToggle.classList.remove("active"); sidebar.classList.remove("active"); overlay.classList.remove("active"); };
 
-  menuToggle.onclick = (e) => {
-    e.stopPropagation();
-    menuToggle.classList.toggle("active");
-    sidebar.classList.toggle("active");
-    overlay.classList.toggle("active");
-  };
-
-  overlay.onclick = () => {
-    menuToggle.classList.remove("active");
-    sidebar.classList.remove("active");
-    overlay.classList.remove("active");
-  };
-
-  // --- remaining original scripts ---
+  // product gallery
   const productImages = [  
     "https://i.ibb.co/jvM4YmPF/07-edb0d688-4aaa-43c1-9208-6d8157da46ce.jpg",  
     "https://i.ibb.co/DH8gb7fB/05-606f822e-0fc5-4d18-9c65-f62e7bffc480.jpg",  
     "https://i.ibb.co/xt2R5J4v/04-53ff9077-7cc2-4be3-b219-6716833dd53f.jpg",  
     "https://i.ibb.co/FkRG79NZ/01-fcbc8ddd-792d-4579-a79e-3c809285087c.jpg",  
-    "https://i.ibb.co/HT2xJ9Sn/03-9cf55b6f-497b-4110-8c35-4edf78364951.jpg",  
-    "https://i.ibb.co/39sYsgdf/02-a734ff1c-6b7f-4292-a012-ecbef8ca1360.jpg",  
-    "https://i.ibb.co/4GFh492/06-69bedde8-2ecc-44fe-93e5-fdbb04c6ca60.jpg"  
+    "https://i.ibb.co/HT2xJ9Sn/03-9cf55b6f-497b-4110-8c35-4edf78364951.jpg"  
   ];  
   let currentImageIndex = 0;  
   const mainImg = document.getElementById('mainProductImg');  
@@ -681,33 +653,17 @@
   const expandIcon = document.getElementById('expandIcon');  
   let isExpanded = true;  
   function toggleOffer() {  
-    if(isExpanded) {  
-      offerContentDiv.classList.add('collapsed');  
-      expandIcon.classList.remove('fa-chevron-down');  
-      expandIcon.classList.add('fa-chevron-up');  
-    } else {  
-      offerContentDiv.classList.remove('collapsed');  
-      expandIcon.classList.remove('fa-chevron-up');  
-      expandIcon.classList.add('fa-chevron-down');  
-    }  
+    if(isExpanded) { offerContentDiv.classList.add('collapsed'); expandIcon.classList.remove('fa-chevron-down'); expandIcon.classList.add('fa-chevron-up'); } 
+    else { offerContentDiv.classList.remove('collapsed'); expandIcon.classList.remove('fa-chevron-up'); expandIcon.classList.add('fa-chevron-down'); }  
     isExpanded = !isExpanded;  
   }  
   offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-  window.addEventListener('resize', () => { if(isExpanded) offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; });  
   offersToggle.addEventListener('click', () => {  
-    if(isExpanded) {  
-      offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-      setTimeout(() => { offerContentDiv.style.maxHeight = "0px"; }, 10);  
-    } else {  
-      offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-    }  
+    if(isExpanded) { offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; setTimeout(() => { offerContentDiv.style.maxHeight = "0px"; }, 10); } 
+    else { offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; }  
     toggleOffer();  
-    setTimeout(() => {  
-      if(!isExpanded) offerContentDiv.style.maxHeight = "0px";  
-      else offerContentDiv.style.maxHeight = "none";  
-    }, 350);  
+    setTimeout(() => { if(!isExpanded) offerContentDiv.style.maxHeight = "0px"; else offerContentDiv.style.maxHeight = "none"; }, 350);  
   });  
-  offerContentDiv.classList.remove('collapsed');  
 
   let countdownInterval;  
   function startCountdown(secondsLeft = 86400) {  
@@ -727,54 +683,79 @@
   }  
   startCountdown(23*3600 + 59*60 + 59);  
 
-  const buyBtn = document.getElementById('buyNowBtn');  
+  // ========== POPUP LOGIC: BUY NOW OPENS TALLY FORM IN MODAL ==========
+  const buyBtn = document.getElementById('buyNowBtn');
+  const buyPopup = document.getElementById('buyPopup');
+  const popupFrame = document.getElementById('popupFrame');
+  const closePopupBtn = document.getElementById('closePopup');
+  const TALLY_LINK = "https://tally.so/r/VLvAPJ";
+
+  function createRipple(e, btn) {
+    const ripple = document.createElement('span');
+    ripple.style.position = 'absolute';
+    ripple.style.backgroundColor = 'rgba(0,0,0,0.1)';
+    ripple.style.borderRadius = '50%';
+    ripple.style.transform = 'scale(0)';
+    ripple.style.width = ripple.style.height = '60px';
+    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;
+    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;
+    ripple.style.transition = 'transform 0.5s, opacity 0.5s';
+    ripple.style.pointerEvents = 'none';
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.appendChild(ripple);
+    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);
+    setTimeout(() => ripple.remove(), 500);
+  }
+
+  function openPopup() {
+    popupFrame.src = TALLY_LINK;
+    buyPopup.classList.add('show-popup');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    buyPopup.classList.remove('show-popup');
+    setTimeout(() => {
+      if(popupFrame.src) popupFrame.src = "";
+    }, 250);
+    document.body.style.overflow = '';
+  }
+
+  buyBtn.addEventListener('click', (e) => {
+    createRipple(e, buyBtn);
+    openPopup();
+  });
+
+  closePopupBtn.addEventListener('click', closePopup);
+  buyPopup.addEventListener('click', (e) => {
+    if(e.target === buyPopup) closePopup();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && buyPopup.classList.contains('show-popup')) closePopup();
+  });
+
+  // Enquire button
   const enquireBtn = document.getElementById('enquireBtn');  
-  function createRetroRipple(e, btn) {  
-    const ripple = document.createElement('span');  
-    ripple.style.position = 'absolute';  
-    ripple.style.backgroundColor = 'rgba(0,0,0,0.08)';  
-    ripple.style.borderRadius = '50%';  
-    ripple.style.transform = 'scale(0)';  
-    ripple.style.width = ripple.style.height = '60px';  
-    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;  
-    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;  
-    ripple.style.transition = 'transform 0.5s, opacity 0.5s';  
-    ripple.style.pointerEvents = 'none';  
-    btn.style.position = 'relative';  
-    btn.style.overflow = 'hidden';  
-    btn.appendChild(ripple);  
-    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);  
-    setTimeout(() => ripple.remove(), 500);  
-  }  
-  buyBtn.addEventListener('click', (e) => {  
-    createRetroRipple(e, buyBtn);  
-    window.open('https://tally.so/r/VLvAPJ', '_blank');  
-  });  
   function openEnquiry() {  
     window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%20Wired%20Headset%20with%20Mic%20at%20₹559', '_blank');  
   }  
   enquireBtn.addEventListener('click', (e) => {  
-    createRetroRipple(e, enquireBtn);  
+    createRipple(e, enquireBtn);  
     openEnquiry();  
   });  
 
+  // home/explore/cart
   const homeBtn = document.getElementById('homeBtn');  
-  homeBtn.addEventListener('click', () => {  
-    window.scrollTo({ top: 0, behavior: 'smooth' });  
-  });  
+  homeBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });  
   const exploreBtn = document.getElementById('exploreBtn');  
-  exploreBtn.addEventListener('click', () => {  
-    document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' });  
-  });  
+  exploreBtn.addEventListener('click', () => { document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' }); });  
   document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · enquire for bulk orders"));  
 
+  // scroll bottom notification
   const scrollNotification = document.getElementById('scrollNotification');  
-  let bottomReached = false;  
-  let timeoutId = null;  
-  let notificationShown = false;  
-  let linkOpened = false;  
+  let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;  
   const BOTTOM_LINK = 'https://tally.so/r/rjr7ov';  
-
   function handleScrollToBottom() {  
     const scrollPosition = window.scrollY + window.innerHeight;  
     const pageHeight = document.documentElement.scrollHeight;  
@@ -788,33 +769,11 @@
           setTimeout(() => { scrollNotification.classList.remove('show'); }, 4000);  
         }  
         if (timeoutId) clearTimeout(timeoutId);  
-        timeoutId = setTimeout(() => {  
-          if (!linkOpened) {  
-            linkOpened = true;  
-            window.open(BOTTOM_LINK, '_blank');  
-            scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →';  
-            scrollNotification.classList.add('show');  
-            setTimeout(() => { scrollNotification.classList.remove('show'); }, 3000);  
-          }  
-        }, 2000);  
+        timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);  
       }  
-    } else {  
-      if (bottomReached && !linkOpened) {  
-        bottomReached = false;  
-        if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }  
-        scrollNotification.classList.remove('show');  
-      }  
-    }  
+    } else { if (bottomReached && !linkOpened) { bottomReached = false; if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; } scrollNotification.classList.remove('show'); } }  
   }  
-  scrollNotification.addEventListener('click', () => {  
-    if (!linkOpened) {  
-      if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }  
-      linkOpened = true;  
-      window.open(BOTTOM_LINK, '_blank');  
-      scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks for visiting →';  
-      setTimeout(() => { scrollNotification.classList.remove('show'); }, 3000);  
-    }  
-  });  
+  scrollNotification.addEventListener('click', () => { if (!linkOpened) { if (timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks →'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });  
   window.addEventListener('scroll', handleScrollToBottom);  
   setTimeout(handleScrollToBottom, 100);  
 
@@ -823,262 +782,5 @@
   fadeElements.forEach(el => observer.observe(el));  
   setTimeout(() => { if(!offerContentDiv.classList.contains('collapsed')) offerContentDiv.style.maxHeight = "none"; }, 200);  
 </script> 
-  <script>
-
-window.addEventListener("load",()=>{
-
-  setTimeout(()=>{
-
-    document
-    .getElementById("loader")
-    .classList.add("hide-loader");
-
-  },3000);
-
-});
-
-</script><!-- ================= POPUP CSS ================= -->
-<style>
-
-.buy-popup{
-  position:fixed;
-  inset:0;
-
-  background:rgba(0,0,0,.65);
-
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-
-  display:flex;
-  justify-content:center;
-  align-items:center;
-
-  opacity:0;
-  visibility:hidden;
-
-  transition:.4s;
-
-  z-index:999999;
-}
-
-/* SHOW POPUP */
-
-.buy-popup.show-popup{
-  opacity:1;
-  visibility:visible;
-}
-
-/* POPUP BOX */
-
-.popup-box{
-  width:92%;
-  max-width:950px;
-
-  height:88vh;
-
-  background:white;
-
-  border-radius:25px;
-
-  overflow:hidden;
-
-  position:relative;
-
-  box-shadow:
-  0 0 40px rgba(255,140,0,.35);
-}
-
-/* IFRAME */
-
-.popup-box iframe{
-  width:100%;
-  height:100%;
-
-  border:none;
-}
-
-/* CLOSE BUTTON */
-
-.close-popup{
-  position:absolute;
-  top:15px;
-  right:15px;
-
-  width:45px;
-  height:45px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:#d96c2b;
-
-  color:white;
-
-  font-size:20px;
-
-  cursor:pointer;
-
-  z-index:100;
-
-  transition:.3s;
-
-  box-shadow:
-  0 0 15px rgba(217,108,43,.45);
-}
-
-.close-popup:hover{
-  transform:rotate(90deg) scale(1.08);
-}
-
-</style>
-
-
-<!-- ================= BUY NOW BUTTON ================= -->
-
-<div class="action-buttons">
-
-  <button class="btn-retro btn-primary" id="buyNowBtn">
-    🎧 Buy Now
-  </button>
-
-  <button class="btn-retro btn-enquire" id="enquireBtn">
-    📞 Enquire
-  </button>
-
-</div>
-
-
-<!-- ================= POPUP HTML ================= -->
-
-<div class="buy-popup" id="buyPopup">
-
-  <div class="popup-box">
-
-    <!-- CLOSE -->
-
-    <button class="close-popup" id="closePopup">
-      ✕
-    </button>
-
-    <!-- IFRAME -->
-
-    <iframe
-      id="popupFrame"
-      src="">
-    </iframe>
-
-  </div>
-
-</div>
-
-
-<!-- ================= POPUP SCRIPT ================= -->
-
-<script>
-
-/* BUY BUTTON */
-
-const buyBtn =
-document.getElementById("buyNowBtn");
-
-/* POPUP */
-
-const buyPopup =
-document.getElementById("buyPopup");
-
-/* IFRAME */
-
-const popupFrame =
-document.getElementById("popupFrame");
-
-/* CLOSE */
-
-const closePopup =
-document.getElementById("closePopup");
-
-
-/* OPEN POPUP */
-
-buyBtn.addEventListener("click",(e)=>{
-
-  /* RIPPLE EFFECT */
-
-  const ripple =
-  document.createElement("span");
-
-  ripple.style.position="absolute";
-  ripple.style.backgroundColor="rgba(0,0,0,.08)";
-  ripple.style.borderRadius="50%";
-  ripple.style.transform="scale(0)";
-  ripple.style.width="60px";
-  ripple.style.height="60px";
-  ripple.style.left=
-  `${e.clientX - buyBtn.getBoundingClientRect().left - 30}px`;
-
-  ripple.style.top=
-  `${e.clientY - buyBtn.getBoundingClientRect().top - 30}px`;
-
-  ripple.style.transition=
-  "transform .5s, opacity .5s";
-
-  ripple.style.pointerEvents="none";
-
-  buyBtn.style.position="relative";
-  buyBtn.style.overflow="hidden";
-
-  buyBtn.appendChild(ripple);
-
-  setTimeout(()=>{
-
-    ripple.style.transform="scale(6)";
-    ripple.style.opacity="0";
-
-  },10);
-
-  setTimeout(()=>{
-
-    ripple.remove();
-
-  },500);
-
-
-  /* SHOW POPUP */
-
-  buyPopup.classList.add("show-popup");
-
-  /* OPEN LINK */
-
-  popupFrame.src =
-  "https://tally.so/r/VLvAPJ";
-
-});
-
-
-/* CLOSE BUTTON */
-
-closePopup.addEventListener("click",()=>{
-
-  buyPopup.classList.remove("show-popup");
-
-  popupFrame.src="";
-
-});
-
-
-/* CLICK OUTSIDE TO CLOSE */
-
-buyPopup.addEventListener("click",(e)=>{
-
-  if(e.target===buyPopup){
-
-    buyPopup.classList.remove("show-popup");
-
-    popupFrame.src="";
-  }
-
-});
-
-</script>
 </body>  
 </html>
