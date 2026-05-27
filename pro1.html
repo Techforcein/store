@@ -26,10 +26,10 @@
   position:fixed;
   inset:0;
 
-  background:rgba(0,0,0,.65);
+  background:rgba(0,0,0,.85);
 
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
 
   display:flex;
   justify-content:center;
@@ -38,7 +38,7 @@
   opacity:0;
   visibility:hidden;
 
-  transition:.4s;
+  transition:.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
 
   z-index:99999;
 }
@@ -54,19 +54,28 @@
 
 .popup-box{
   width:90%;
-  max-width:900px;
+  max-width:920px;
   height:85vh;
 
-  background:white;
-
-  border-radius:25px;
+  background:#0a0a1a;
+  border:2px solid #00e5ff;
+  border-radius:28px;
 
   overflow:hidden;
 
   position:relative;
 
   box-shadow:
-  0 0 40px rgba(255,140,0,.35);
+  0 0 0 2px rgba(0,229,255,0.2),
+  0 25px 45px rgba(0,0,0,0.5),
+  0 0 0 4px rgba(255,0,204,0.3);
+  
+  animation:popupGlowPulse 2.2s infinite alternate;
+}
+
+@keyframes popupGlowPulse{
+  0%{box-shadow:0 0 0 2px rgba(0,229,255,0.2),0 25px 45px rgba(0,0,0,0.5),0 0 0 4px rgba(255,0,204,0.2);}
+  100%{box-shadow:0 0 0 4px rgba(0,229,255,0.5),0 30px 55px rgba(0,0,0,0.7),0 0 0 6px rgba(255,0,204,0.5);}
 }
 
 /* IFRAME */
@@ -74,34 +83,49 @@
 .popup-box iframe{
   width:100%;
   height:100%;
+  background:#fefefe;
 }
 
 /* CLOSE BUTTON */
 
 .close-popup{
   position:absolute;
-  top:15px;
-  right:15px;
+  top:16px;
+  right:16px;
 
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
 
   border:none;
 
   border-radius:50%;
 
-  background:#ff6b00;
+  background:#ff00cc;
 
   color:white;
 
-  font-size:20px;
+  font-size:22px;
+  font-weight:bold;
 
   cursor:pointer;
 
-  z-index:10;
+  z-index:20;
+
+  transition:0.2s;
 
   box-shadow:
-  0 0 15px rgba(255,107,0,.45);
+  0 0 10px rgba(255,0,204,0.7);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.close-popup:hover{
+  transform:scale(1.05);
+  background:#00e5ff;
+  color:#0a0a1a;
+  box-shadow:0 0 18px #00e5ff;
 }
     /* LOADER */
 
@@ -505,18 +529,10 @@
 <body>  
   <!-- LOADER -->
 <div id="loader">
-
-  <!-- GIF -->
   <img src="https://res.cloudinary.com/ds81x9uqr/image/upload/q_auto/f_auto/v1779530962/Loading_Dots_In_Yellow_2_drzyse.gif" class="loader-gif" alt="Loading">
-
-  <!-- TEXT -->
-  <div class="loading-text">
-    LOADING...
-  </div>
-
+  <div class="loading-text">LOADING...</div>
 </div>
 
-<!-- ========== 2. MENU HTML (Sidebar + Overlay + Toggle Button) ========== -->
 <!-- MENU BUTTON -->
 <div class="menu-toggle" id="menuToggle">
   <span></span>
@@ -529,68 +545,23 @@
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-
   <ul class="nav-links">
-
-    <li>
-      <a href="pro1.html">
-        <img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="3-in-1 Glow Data Cable">
-        <span>3-in-1 Glow Data Cable</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro2.html">
-        <img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="Wired Headset with Mic">
-        <span>Wired Headset with Mic</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro3.html">
-        <img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="Wired Bass Earphones">
-        <span>Wired Bass Earphones</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro5.html">
-        <img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="Budget Mouse Pad">
-        <span>Budget Mouse Pad</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro6.html">
-        <img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png"  alt="Metal Portable Laptop Stand">
-        <span>Metal Portable Laptop Stand</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro7.html">
-        <img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="Shortcut Keyboard Mat">
-        <span>Shortcut Keyboard Mat</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro8.html">
-        <img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="Wrist S Mouse Pad">
-        <span>Wrist S Mouse Pad</span>
-      </a>
-    </li>
-
+    <li><a href="#"><img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="cable"><span>3-in-1 Glow Data Cable</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="headset"><span>Wired Headset with Mic</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="earphone"><span>Wired Bass Earphones</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="mousepad"><span>Budget Mouse Pad</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png" alt="stand"><span>Metal Portable Laptop Stand</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="keymat"><span>Shortcut Keyboard Mat</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="wristpad"><span>Wrist S Mouse Pad</span></a></li>
   </ul>
-
 </div>
 
 <nav class="navbar">  
   <div class="container nav-inner">  
     <div class="logo">Tech Force<span>Trending</span></div>  
     <div class="nav-buttons">  
-     <a href="pro4.html"> <button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i>Home </button>  </a>
-     <a href="pro4.html"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button>  </a>
+     <a href="#"><button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i>Home </button></a>
+     <a href="#"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button></a>
     </div>  
     <div class="cart-icon"><i class="fas fa-cassette-tape"></i></div>  
   </div>  
@@ -607,13 +578,7 @@
     <div class="details">  
       <h1 class="product-title">3-in-1 Glow Data Cable – Fast Charging, LED Light, Multi-Device Sync</h1>  
       <div class="rating-section">  
-        <div class="stars">  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star"></i>  
-          <i class="fas fa-star-half-alt"></i>  
-        </div>  
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>  
         <div class="rating-score">4.7 / 5</div>  
         <div class="rating-text"><i class="fas fa-users"></i> 2,350+ glowing ratings</div>  
       </div>  
@@ -627,93 +592,65 @@
         <button class="btn-retro btn-primary" id="buyNowBtn">⚡ Buy Now</button> 
         <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>  
       </div>  
-      <!-- Description Section -->  
       <div class="offers-card">  
         <div><i class="fas fa-bolt"></i> <strong>✨ Product Description</strong></div>  
-        <div style="margin-top: 12px; line-height: 1.6;">  
-          <p>Experience the future of charging with the 3-in-1 Glow Data Cable. This innovative cable features built-in LED lighting that creates a stunning atmosphere while charging. Supports fast charging and data sync for all your devices. Perfect for car, office, gaming desk, or bedside table. The multi-head design lets you charge Type-C, Micro USB, and Lightning devices with a single cable.</p>  
-        </div>  
+        <div style="margin-top: 12px; line-height: 1.6;"><p>Experience the future of charging with the 3-in-1 Glow Data Cable. This innovative cable features built-in LED lighting that creates a stunning atmosphere while charging. Supports fast charging and data sync for all your devices.</p></div>  
       </div>  
-      <!-- Key Features Section -->  
       <div class="offers-card">  
-        <div class="offers-header" id="offersToggle">  
-          <span><i class="fas fa-tape"></i> 🔥 Key Features</span>  
-          <i class="fas fa-chevron-down expand-icon" id="expandIcon"></i>  
-        </div>  
+        <div class="offers-header" id="offersToggle"><span><i class="fas fa-tape"></i> 🔥 Key Features</span><i class="fas fa-chevron-down expand-icon" id="expandIcon"></i></div>  
         <div class="offer-content" id="offerContent">  
-          <p><i class="fas fa-check-circle"></i> <strong>3-in-1 Multi-Connector</strong> – Type-C, Micro USB, Lightning in one cable</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Glowing LED Light</strong> – Creates cool ambient effect while charging</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Fast Charging Support</strong> – Up to 2.4A output for rapid power</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Sync & Transfer</strong> – Data transfer speeds up to 480Mbps</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Car Atmosphere Light</strong> – Perfect for night driving and interior accent</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Durable Braided Design</strong> – Tangle-free and bend-resistant</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Universal Compatibility</strong> – Works with phones, tablets, power banks</p>  
-          <p><i class="fas fa-check-circle"></i> <strong>Length: 1.2m / 3.9ft</strong> – Perfect reach for desk or car use</p>  
+          <p><i class="fas fa-check-circle"></i> <strong>3-in-1 Multi-Connector</strong> – Type-C, Micro USB, Lightning</p>  
+          <p><i class="fas fa-check-circle"></i> <strong>Glowing LED Light</strong> – Cool ambient effect</p>  
+          <p><i class="fas fa-check-circle"></i> <strong>Fast Charging Support</strong> – Up to 2.4A output</p>  
+          <p><i class="fas fa-check-circle"></i> <strong>Sync & Transfer</strong> – 480Mbps</p>  
+          <p><i class="fas fa-check-circle"></i> <strong>Durable Braided Design</strong> – Tangle-free</p>  
         </div>  
       </div>  
-      <!-- Specifications Section -->  
       <div class="offers-card" style="margin-top: 0;">  
         <div><i class="fas fa-microchip"></i> <strong>📋 Technical Specifications</strong></div>  
         <div class="specs-grid">  
           <div class="spec-item"><span class="spec-label">Product Name:</span><span class="spec-value">3-in-1 Glow Data Cable</span></div>  
           <div class="spec-item"><span class="spec-label">Connectors:</span><span class="spec-value">Type-C, Micro USB, Lightning</span></div>  
-          <div class="spec-item"><span class="spec-label">Lighting:</span><span class="spec-value">LED Glow (Blue/Pink/Green)</span></div>  
           <div class="spec-item"><span class="spec-label">Current Output:</span><span class="spec-value">Up to 2.4A</span></div>  
-          <div class="spec-item"><span class="spec-label">Data Speed:</span><span class="spec-value">480 Mbps</span></div>  
-          <div class="spec-item"><span class="spec-label">Cable Length:</span><span class="spec-value">1.2 meters (3.9 ft)</span></div>  
-          <div class="spec-item"><span class="spec-label">Material:</span><span class="spec-value">Braided Nylon + Aluminum Alloy</span></div>  
-          <div class="spec-item"><span class="spec-label">Country of Origin:</span><span class="spec-value">India</span></div>  
-          <div class="spec-item"><span class="spec-label">GST:</span><span class="spec-value">18%</span></div>  
+          <div class="spec-item"><span class="spec-label">Cable Length:</span><span class="spec-value">1.2 meters</span></div>  
         </div>  
         <div class="countdown" id="countdownTimer">⏳ Flash sale ends: 23h 59m 59s</div>  
       </div>  
     </div>  
   </div>  
-  <!-- Ideal For Section -->  
   <div class="offers-card fade-up" style="margin: 0 0 24px 0;">  
     <div><i class="fas fa-thumbs-up"></i> <strong>🎯 Perfect For</strong></div>  
-    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px;">  
-      <span class="keyword-tag"><i class="fas fa-car"></i> Car Atmosphere Light</span>  
-      <span class="keyword-tag"><i class="fas fa-desktop"></i> Gaming Desk Setup</span>  
-      <span class="keyword-tag"><i class="fas fa-bed"></i> Nightstand Charging</span>  
-      <span class="keyword-tag"><i class="fas fa-briefcase"></i> Office & Travel</span>  
-      <span class="keyword-tag"><i class="fas fa-mobile-alt"></i> Multi-Device Household</span>  
-      <span class="keyword-tag"><i class="fas fa-music"></i> Party & Ambient Lighting</span>  
-    </div>  
+    <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px;"><span class="keyword-tag"><i class="fas fa-car"></i> Car Atmosphere Light</span><span class="keyword-tag"><i class="fas fa-desktop"></i> Gaming Desk</span><span class="keyword-tag"><i class="fas fa-mobile-alt"></i> Multi-Device</span></div>  
   </div>  
-  <!-- Highlights Grid -->  
   <div class="highlights-grid fade-up">  
-    <div class="hl-item"><i class="fas fa-plug"></i><span>3-in-1 Connector</span></div>  
-    <div class="hl-item"><i class="fas fa-lightbulb"></i><span>LED Glow Light</span></div>  
-    <div class="hl-item"><i class="fas fa-battery-full"></i><span>Fast 2.4A Charge</span></div>  
-    <div class="hl-item"><i class="fas fa-sync-alt"></i><span>Data Sync</span></div>  
-    <div class="hl-item"><i class="fas fa-car"></i><span>Car Ambient</span></div>  
+    <div class="hl-item"><i class="fas fa-plug"></i><span>3-in-1</span></div><div class="hl-item"><i class="fas fa-lightbulb"></i><span>LED Glow</span></div><div class="hl-item"><i class="fas fa-battery-full"></i><span>Fast 2.4A</span></div><div class="hl-item"><i class="fas fa-sync-alt"></i><span>Data Sync</span></div><div class="hl-item"><i class="fas fa-car"></i><span>Car Ambient</span></div>  
   </div>  
-  <!-- Keywords Cloud -->  
   <div class="keyword-cloud fade-up">  
-    <span class="keyword-tag">3 in 1 cable</span>  
-    <span class="keyword-tag">glow data cable</span>  
-    <span class="keyword-tag">LED charging cable</span>  
-    <span class="keyword-tag">Type C cable with light</span>  
-    <span class="keyword-tag">iPhone Android charger</span>  
-    <span class="keyword-tag">multi charging cable</span>  
-    <span class="keyword-tag">car atmosphere light</span>  
-    <span class="keyword-tag">braided USB cable</span>  
-    <span class="keyword-tag">fast charging wire</span>  
-    <span class="keyword-tag">glowing phone cable</span>  
-    <span class="keyword-tag">micro USB lighting cable</span>  
-    <span class="keyword-tag">gaming desk accessory</span>  
+    <span class="keyword-tag">3 in 1 cable</span><span class="keyword-tag">glow data cable</span><span class="keyword-tag">LED charging cable</span><span class="keyword-tag">fast charging wire</span><span class="keyword-tag">gaming desk accessory</span>  
   </div>  
 </main>  
 <footer>© 2026 Techforce technologies · 3-in-1 Glow Data Cable | LED Ambient Light | Fast Charging & Sync | Made in India</footer>  
 
-<!-- Scroll to bottom notification -->  
-<div class="scroll-notification" id="scrollNotification">  
-  <i class="fas fa-gift"></i> You've reached the end! Get special offer →  
-</div>  
+<div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> You've reached the end! Get special offer →</div>  
+
+<!-- BUY NOW POPUP (relocated to body end for clarity) -->
+<div class="buy-popup" id="buyPopup">
+  <div class="popup-box">
+    <button class="close-popup" id="closePopup">✕</button>
+    <iframe id="popupFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
 
 <script>  
-  // Menu Toggle Logic (Step 4)
+  // loader fade
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loader = document.getElementById('loader');
+      if(loader) loader.classList.add('hide-loader');
+    }, 800);
+  });
+
+  // Menu Toggle Logic
   const menuToggle = document.getElementById("menuToggle");
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");
@@ -724,21 +661,18 @@
     sidebar.classList.toggle("active");
     overlay.classList.toggle("active");
   };
-
   overlay.onclick = () => {
     menuToggle.classList.remove("active");
     sidebar.classList.remove("active");
     overlay.classList.remove("active");
   };
 
-  // --- remaining original scripts ---
+  // product images gallery
   const productImages = [  
     "https://i.ibb.co/SwwS5RF4/02-701f2d68-c930-48a8-9972-9ca09c4909db.jpg",  
     "https://i.ibb.co/fdVN1vYD/02-f4f8952a-f74b-48a1-b337-0058ec492523.jpg",  
     "https://i.ibb.co/4Rrh4gx2/05-b43ab21b-ff2e-4837-b111-2bd16d9113e6.jpg",  
-    "https://i.ibb.co/d4jWjzq0/04-f1803e29-ebc1-4f35-9170-f11ebecefe11.jpg",  
-    "https://i.ibb.co/ks27PmMy/03-ccaab95d-ff85-4013-803f-5d5914b97ec7.jpg",  
-    "https://i.ibb.co/zWhrFvtT/01-196bdf70-ca1d-40e3-918e-84fb0c629f44.jpg"  
+    "https://i.ibb.co/d4jWjzq0/04-f1803e29-ebc1-4f35-9170-f11ebecefe11.jpg"
   ];  
   let currentImageIndex = 0;  
   const mainImg = document.getElementById('mainProductImg');  
@@ -762,7 +696,7 @@
   renderThumbnails();  
   mainImg.src = productImages[0];  
 
-  // Expand/collapse offers  
+  // Expand/collapse offers
   const offersToggle = document.getElementById('offersToggle');  
   const offerContentDiv = document.getElementById('offerContent');  
   const expandIcon = document.getElementById('expandIcon');  
@@ -780,7 +714,6 @@
     isExpanded = !isExpanded;  
   }  
   offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-  window.addEventListener('resize', () => { if(isExpanded) offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; });  
   offersToggle.addEventListener('click', () => {  
     if(isExpanded) {  
       offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
@@ -789,12 +722,8 @@
       offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
     }  
     toggleOffer();  
-    setTimeout(() => {  
-      if(!isExpanded) offerContentDiv.style.maxHeight = "0px";  
-      else offerContentDiv.style.maxHeight = "none";  
-    }, 350);  
+    setTimeout(() => { if(!isExpanded) offerContentDiv.style.maxHeight = "0px"; else offerContentDiv.style.maxHeight = "none"; }, 350);  
   });  
-  offerContentDiv.classList.remove('collapsed');  
 
   // Countdown timer  
   let countdownInterval;  
@@ -815,51 +744,81 @@
   }  
   startCountdown(23*3600 + 59*60 + 59);  
 
-  // Buy Now button - opens Tally form  
-  const buyBtn = document.getElementById('buyNowBtn');  
-  const enquireBtn = document.getElementById('enquireBtn');  
-  function createRetroRipple(e, btn) {  
-    const ripple = document.createElement('span');  
-    ripple.style.position = 'absolute';  
-    ripple.style.backgroundColor = 'rgba(0,229,255,0.2)';  
-    ripple.style.borderRadius = '50%';  
-    ripple.style.transform = 'scale(0)';  
-    ripple.style.width = ripple.style.height = '60px';  
-    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;  
-    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;  
-    ripple.style.transition = 'transform 0.5s, opacity 0.5s';  
-    ripple.style.pointerEvents = 'none';  
-    btn.style.position = 'relative';  
-    btn.style.overflow = 'hidden';  
-    btn.appendChild(ripple);  
-    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);  
-    setTimeout(() => ripple.remove(), 500);  
-  }  
-  buyBtn.addEventListener('click', (e) => {  
-  createRetroRipple(e, buyBtn);  
+  // ----- MODIFIED: BUY NOW POPUP WITH TALLY LINK -----
+  const buyBtn = document.getElementById('buyNowBtn');
+  const popup = document.getElementById('buyPopup');
+  const popupFrame = document.getElementById('popupFrame');
+  const closePopupBtn = document.getElementById('closePopup');
 
-  // SHOW POPUP
-  document.getElementById("buyPopup").classList.add("show-popup");
+  // TALLY ORDER FORM URL (popup will embed this)
+  const TALLY_FORM_URL = "https://tally.so/r/VLvAPJ";
 
-  // CHANGE IFRAME LINK
-  document.getElementById("popupFrame").src =
-    "https://tally.so/r/VLvAPJ";
-});
-  // CLOSE POPUP
+  function createRetroRipple(e, btn) {
+    const ripple = document.createElement('span');
+    ripple.style.position = 'absolute';
+    ripple.style.backgroundColor = 'rgba(0,229,255,0.4)';
+    ripple.style.borderRadius = '50%';
+    ripple.style.transform = 'scale(0)';
+    ripple.style.width = ripple.style.height = '60px';
+    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;
+    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;
+    ripple.style.transition = 'transform 0.5s, opacity 0.5s';
+    ripple.style.pointerEvents = 'none';
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.appendChild(ripple);
+    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);
+    setTimeout(() => ripple.remove(), 500);
+  }
 
-document
-.getElementById("closePopup")
-.addEventListener("click",()=>{
+  // OPEN POPUP WITH TALLY LINK
+  function openBuyPopup() {
+    // set iframe source to Tally form
+    popupFrame.src = TALLY_FORM_URL;
+    // show popup with smooth transition
+    popup.classList.add('show-popup');
+    // optional: prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
 
-  document
-  .getElementById("buyPopup")
-  .classList.remove("show-popup");
+  function closePopupAndReset() {
+    popup.classList.remove('show-popup');
+    // small delay to clear iframe source to stop loading
+    setTimeout(() => {
+      if(popupFrame.src !== "") {
+        popupFrame.src = "";
+      }
+    }, 300);
+    document.body.style.overflow = '';
+  }
 
-  // STOP IFRAME
-  document
-  .getElementById("popupFrame")
-  .src = "";
-});
+  // Buy Now click event
+  buyBtn.addEventListener('click', (e) => {
+    createRetroRipple(e, buyBtn);
+    openBuyPopup();
+  });
+
+  // Close popup via close button
+  closePopupBtn.addEventListener('click', () => {
+    closePopupAndReset();
+  });
+
+  // Click on overlay background? close when clicking outside box (optional)
+  popup.addEventListener('click', (e) => {
+    if(e.target === popup) {
+      closePopupAndReset();
+    }
+  });
+
+  // ESC key support
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape' && popup.classList.contains('show-popup')) {
+      closePopupAndReset();
+    }
+  });
+
+  // Enquiry WhatsApp
+  const enquireBtn = document.getElementById('enquireBtn');
   function openEnquiry() {  
     window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%203-in-1%20Glow%20Data%20Cable%20at%20₹149', '_blank');  
   }  
@@ -868,25 +827,17 @@ document
     openEnquiry();  
   });  
 
-  // Home Button  
+  // home & explore
   const homeBtn = document.getElementById('homeBtn');  
   homeBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });  
-
-  // Explore Button  
   const exploreBtn = document.getElementById('exploreBtn');  
   exploreBtn.addEventListener('click', () => { document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' }); });  
-
-  // Cart icon  
   document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · enquire for bulk orders"));  
 
-  // Scroll to bottom feature  
+  // Scroll bottom offer (unchanged but works)
   const scrollNotification = document.getElementById('scrollNotification');  
-  let bottomReached = false;  
-  let timeoutId = null;  
-  let notificationShown = false;  
-  let linkOpened = false;  
+  let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;  
   const BOTTOM_LINK = 'https://tally.so/r/2E1yjj';  
-
   function handleScrollToBottom() {  
     const scrollPosition = window.scrollY + window.innerHeight;  
     const pageHeight = document.documentElement.scrollHeight;  
@@ -900,62 +851,19 @@ document
           setTimeout(() => { scrollNotification.classList.remove('show'); }, 4000);  
         }  
         if (timeoutId) clearTimeout(timeoutId);  
-        timeoutId = setTimeout(() => {  
-          if (!linkOpened) {  
-            linkOpened = true;  
-            window.open(BOTTOM_LINK, '_blank');  
-            scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →';  
-            scrollNotification.classList.add('show');  
-            setTimeout(() => { scrollNotification.classList.remove('show'); }, 3000);  
-          }  
-        }, 2000);  
+        timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);  
       }  
-    } else {  
-      if (bottomReached && !linkOpened) {  
-        bottomReached = false;  
-        if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }  
-        scrollNotification.classList.remove('show');  
-      }  
-    }  
+    } else { if (bottomReached && !linkOpened) { bottomReached = false; if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; } scrollNotification.classList.remove('show'); } }  
   }  
-  scrollNotification.addEventListener('click', () => {  
-    if (!linkOpened) {  
-      if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }  
-      linkOpened = true;  
-      window.open(BOTTOM_LINK, '_blank');  
-      scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks for visiting →';  
-      setTimeout(() => { scrollNotification.classList.remove('show'); }, 3000);  
-    }  
-  });  
+  scrollNotification.addEventListener('click', () => { if (!linkOpened) { if (timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks →'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });  
   window.addEventListener('scroll', handleScrollToBottom);  
   setTimeout(handleScrollToBottom, 100);  
 
-  // Scroll fade animation  
+  // fade animation  
   const fadeElements = document.querySelectorAll('.fade-up');  
   const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });  
   fadeElements.forEach(el => observer.observe(el));  
   setTimeout(() => { if(!offerContentDiv.classList.contains('collapsed')) offerContentDiv.style.maxHeight = "none"; }, 200);  
 </script>  
-  <!-- BUY NOW POPUP -->
-
-<div class="buy-popup" id="buyPopup">
-
-  <div class="popup-box">
-
-    <!-- CLOSE BUTTON -->
-    <button class="close-popup" id="closePopup">
-      ✕
-    </button>
-
-    <!-- IFRAME -->
-    <iframe
-      id="popupFrame"
-      src=""
-      frameborder="0">
-    </iframe>
-
-  </div>
-
-</div>
 </body>  
 </html>
