@@ -837,6 +837,248 @@ window.addEventListener("load",()=>{
 
 });
 
+</script><!-- ================= POPUP CSS ================= -->
+<style>
+
+.buy-popup{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.65);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:.4s;
+
+  z-index:999999;
+}
+
+/* SHOW POPUP */
+
+.buy-popup.show-popup{
+  opacity:1;
+  visibility:visible;
+}
+
+/* POPUP BOX */
+
+.popup-box{
+  width:92%;
+  max-width:950px;
+
+  height:88vh;
+
+  background:white;
+
+  border-radius:25px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  box-shadow:
+  0 0 40px rgba(255,140,0,.35);
+}
+
+/* IFRAME */
+
+.popup-box iframe{
+  width:100%;
+  height:100%;
+
+  border:none;
+}
+
+/* CLOSE BUTTON */
+
+.close-popup{
+  position:absolute;
+  top:15px;
+  right:15px;
+
+  width:45px;
+  height:45px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#d96c2b;
+
+  color:white;
+
+  font-size:20px;
+
+  cursor:pointer;
+
+  z-index:100;
+
+  transition:.3s;
+
+  box-shadow:
+  0 0 15px rgba(217,108,43,.45);
+}
+
+.close-popup:hover{
+  transform:rotate(90deg) scale(1.08);
+}
+
+</style>
+
+
+<!-- ================= BUY NOW BUTTON ================= -->
+
+<div class="action-buttons">
+
+  <button class="btn-retro btn-primary" id="buyNowBtn">
+    🎧 Buy Now
+  </button>
+
+  <button class="btn-retro btn-enquire" id="enquireBtn">
+    📞 Enquire
+  </button>
+
+</div>
+
+
+<!-- ================= POPUP HTML ================= -->
+
+<div class="buy-popup" id="buyPopup">
+
+  <div class="popup-box">
+
+    <!-- CLOSE -->
+
+    <button class="close-popup" id="closePopup">
+      ✕
+    </button>
+
+    <!-- IFRAME -->
+
+    <iframe
+      id="popupFrame"
+      src="">
+    </iframe>
+
+  </div>
+
+</div>
+
+
+<!-- ================= POPUP SCRIPT ================= -->
+
+<script>
+
+/* BUY BUTTON */
+
+const buyBtn =
+document.getElementById("buyNowBtn");
+
+/* POPUP */
+
+const buyPopup =
+document.getElementById("buyPopup");
+
+/* IFRAME */
+
+const popupFrame =
+document.getElementById("popupFrame");
+
+/* CLOSE */
+
+const closePopup =
+document.getElementById("closePopup");
+
+
+/* OPEN POPUP */
+
+buyBtn.addEventListener("click",(e)=>{
+
+  /* RIPPLE EFFECT */
+
+  const ripple =
+  document.createElement("span");
+
+  ripple.style.position="absolute";
+  ripple.style.backgroundColor="rgba(0,0,0,.08)";
+  ripple.style.borderRadius="50%";
+  ripple.style.transform="scale(0)";
+  ripple.style.width="60px";
+  ripple.style.height="60px";
+  ripple.style.left=
+  `${e.clientX - buyBtn.getBoundingClientRect().left - 30}px`;
+
+  ripple.style.top=
+  `${e.clientY - buyBtn.getBoundingClientRect().top - 30}px`;
+
+  ripple.style.transition=
+  "transform .5s, opacity .5s";
+
+  ripple.style.pointerEvents="none";
+
+  buyBtn.style.position="relative";
+  buyBtn.style.overflow="hidden";
+
+  buyBtn.appendChild(ripple);
+
+  setTimeout(()=>{
+
+    ripple.style.transform="scale(6)";
+    ripple.style.opacity="0";
+
+  },10);
+
+  setTimeout(()=>{
+
+    ripple.remove();
+
+  },500);
+
+
+  /* SHOW POPUP */
+
+  buyPopup.classList.add("show-popup");
+
+  /* OPEN LINK */
+
+  popupFrame.src =
+  "https://tally.so/r/VLvAPJ";
+
+});
+
+
+/* CLOSE BUTTON */
+
+closePopup.addEventListener("click",()=>{
+
+  buyPopup.classList.remove("show-popup");
+
+  popupFrame.src="";
+
+});
+
+
+/* CLICK OUTSIDE TO CLOSE */
+
+buyPopup.addEventListener("click",(e)=>{
+
+  if(e.target===buyPopup){
+
+    buyPopup.classList.remove("show-popup");
+
+    popupFrame.src="";
+  }
+
+});
+
 </script>
 </body>  
 </html>
