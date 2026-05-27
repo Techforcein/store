@@ -18,7 +18,6 @@
   <!-- Font Awesome 6.5.1 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>  
 
-  <!-- 3. CSS Styles including menu styles -->
   <style>  
     * { margin: 0; padding: 0; box-sizing: border-box; }  
     body {  
@@ -78,7 +77,6 @@
       transition:0.3s;
     }
 
-    /* BUTTON ANIMATION */
     .menu-toggle.active span:nth-child(1){
       transform:rotate(45deg) translate(5px,5px);
     }
@@ -91,7 +89,6 @@
       transform:rotate(-45deg) translate(6px,-6px);
     }
 
-    /* BLUR OVERLAY */
     .overlay{
       position:fixed;
       inset:0;
@@ -108,7 +105,6 @@
       visibility:visible;
     }
 
-    /* SIDEBAR */
     .sidebar{
       position:fixed;
       top:0;
@@ -127,7 +123,6 @@
       left:0;
     }
 
-    /* PRODUCT GRID */
     .nav-links{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -136,7 +131,6 @@
       padding:0;
     }
 
-    /* CARD */
     .nav-links li{
       background:rgba(255,255,255,0.18);
       backdrop-filter:blur(10px);
@@ -150,7 +144,6 @@
       transform:translateY(-6px);
     }
 
-    /* LINK */
     .nav-links a{
       text-decoration:none;
       color:#b44c12;
@@ -161,7 +154,6 @@
       padding:25px 15px;
     }
 
-    /* IMAGE */
     .nav-links img{
       width:180px;
       height:120px;
@@ -169,7 +161,6 @@
       margin-bottom:18px;
     }
 
-    /* TEXT */
     .nav-links span{
       font-size:18px;
       text-align:center;
@@ -183,7 +174,6 @@
       padding: 12px 0; backdrop-filter: blur(2px);  
     }  
 
-    /* Adjust container padding for logo to avoid overlap with menu button on small screens */
     @media (max-width: 640px) {
       .nav-inner { padding-left: 60px; }
       .menu-toggle { top: 16px; left: 12px; width: 48px; height: 48px; }
@@ -261,7 +251,6 @@
     .fade-up { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }  
     .fade-up.visible { opacity: 1; transform: translateY(0); }  
     footer { text-align: center; padding: 30px 16px; border-top: 3px double #d6c7af; font-size: 0.7rem; font-family: monospace; color: #987b5c; margin-top: 20px; }  
-    /* Scroll to bottom notification */  
     .scroll-notification {  
       position: fixed; bottom: 30px; right: 30px;  
       background: #e26d2c; color: white; padding: 12px 20px;  
@@ -272,6 +261,68 @@
     }  
     .scroll-notification.show { transform: translateX(0); }  
     .scroll-notification i { margin-right: 8px; }  
+    
+    /* BUY POPUP STYLES */
+    .buy-popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.75);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      opacity:0;
+      visibility:hidden;
+      transition:.35s cubic-bezier(0.2,0.9,0.4,1.1);
+      z-index:999999;
+    }
+    .buy-popup.show-popup{
+      opacity:1;
+      visibility:visible;
+    }
+    .popup-box{
+      width:92%;
+      max-width:950px;
+      height:88vh;
+      background:#ffffff;
+      border-radius:28px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:0 0 0 3px rgba(217,108,43,0.3), 0 25px 45px rgba(0,0,0,0.3);
+    }
+    .popup-box iframe{
+      width:100%;
+      height:100%;
+      border:none;
+      background:#fff;
+    }
+    .close-popup{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:46px;
+      height:46px;
+      border:none;
+      border-radius:50%;
+      background:#d96c2b;
+      color:white;
+      font-size:22px;
+      font-weight:bold;
+      cursor:pointer;
+      z-index:100;
+      transition:.2s ease;
+      box-shadow:0 0 12px rgba(217,108,43,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .close-popup:hover{
+      transform:scale(1.07) rotate(90deg);
+      background:#ff8c42;
+      box-shadow:0 0 18px #ff8c42;
+    }
+    
     @media (min-width: 768px) {  
       .product-main { flex-direction: row; gap: 48px; }  
       .product-title { font-size: 2.4rem; }  
@@ -281,240 +332,106 @@
     @media (max-width: 480px) { .btn-retro { font-size: 0.75rem; } .nav-buttons { gap: 10px; } .nav-btn { padding: 6px 12px; font-size: 0.7rem; } .scroll-notification { bottom: 20px; right: 20px; padding: 8px 16px; font-size: 0.7rem; } }  
   </style>  
 </head>  
-<body>  <!-- TECH FORCE LOADER -->
-
+<body>  
+<!-- LOADER -->
 <div id="loader">
-
-  <img 
-  src="https://res.cloudinary.com/ds81x9uqr/image/upload/q_auto/f_auto/v1779530962/Loading_Dots_In_Yellow_2_drzyse.gif" 
-  class="loader-gif" 
-  alt="Loading">
-
-  <div class="loading-text">
-    LOADING...
-  </div>
-
+  <img src="https://res.cloudinary.com/ds81x9uqr/image/upload/q_auto/f_auto/v1779530962/Loading_Dots_In_Yellow_2_drzyse.gif" class="loader-gif" alt="Loading">
+  <div class="loading-text">LOADING...</div>
 </div>
 
 <style>
-
-/* LOADER */
-
 #loader{
   position:fixed;
   inset:0;
-
   display:flex;
   justify-content:center;
   align-items:center;
   flex-direction:column;
-
   z-index:99999;
-
   overflow:hidden;
-
-  background:
-  rgba(5,5,5,.45);
-
+  background:rgba(5,5,5,.45);
   backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-
   transition:.8s;
 }
-
-/* OVERLAY */
-
 #loader::after{
   content:"";
-
   position:absolute;
   inset:0;
-
-  background:
-  radial-gradient(
-  circle at center,
-  rgba(0,255,229,.08),
-  rgba(0,0,0,.65)
-  );
-
+  background:radial-gradient(circle at center, rgba(0,255,229,.08), rgba(0,0,0,.65));
   z-index:-2;
 }
-
-/* GLOW BORDER */
-
 #loader::before{
   content:"";
-
   position:absolute;
   inset:18px;
-
   border-radius:35px;
-
   border:2px solid rgba(0,255,229,.35);
-
-  box-shadow:
-  0 0 25px rgba(0,255,229,.35),
-  inset 0 0 25px rgba(255,255,255,.03);
-
+  box-shadow:0 0 25px rgba(0,255,229,.35), inset 0 0 25px rgba(255,255,255,.03);
   animation:borderGlow 4s linear infinite;
 }
-
-/* GIF */
-
 .loader-gif{
   width:120px;
   height:120px;
-
   object-fit:contain;
-
-  filter:
-  drop-shadow(0 0 25px #ffd000);
+  filter:drop-shadow(0 0 25px #ffd000);
 }
-
-/* TEXT */
-
 .loading-text{
   margin-top:18px;
-
   color:white;
-
   font-size:13px;
-
   letter-spacing:5px;
-
   text-transform:uppercase;
-
-  text-shadow:
-  0 0 12px #00ffe5;
-
+  text-shadow:0 0 12px #00ffe5;
   animation:textBlink 1.5s infinite;
 }
-
-/* ANIMATIONS */
-
 @keyframes borderGlow{
-
-  0%{
-    filter:hue-rotate(0deg);
-  }
-
-  100%{
-    filter:hue-rotate(360deg);
-  }
+  0%{ filter:hue-rotate(0deg); }
+  100%{ filter:hue-rotate(360deg); }
 }
-
 @keyframes textBlink{
-
-  0%,100%{
-    opacity:1;
-  }
-
-  50%{
-    opacity:.4;
-  }
+  0%,100%{ opacity:1; }
+  50%{ opacity:.4; }
 }
-
-/* HIDE */
-
 .hide-loader{
   opacity:0;
   visibility:hidden;
 }
-
 </style>
 
 <script>
-
 window.addEventListener("load",()=>{
-
   setTimeout(()=>{
-
-    document
-    .getElementById("loader")
-    .classList.add("hide-loader");
-
+    document.getElementById("loader").classList.add("hide-loader");
   },3000);
-
 });
-
 </script>
 
-<!-- ========== 2. MENU HTML (Sidebar + Overlay + Toggle Button) ========== -->
 <!-- MENU BUTTON -->
 <div class="menu-toggle" id="menuToggle">
   <span></span>
   <span></span>
   <span></span>
 </div>
-
-<!-- BLUR OVERLAY -->
 <div class="overlay" id="overlay"></div>
-
-<!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
-
   <ul class="nav-links">
-
-    <li>
-      <a href="pro1.html">
-        <img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="3-in-1 Glow Data Cable">
-        <span>3-in-1 Glow Data Cable</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro2.html">
-        <img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="Wired Headset with Mic">
-        <span>Wired Headset with Mic</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro3.html">
-        <img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="Wired Bass Earphones">
-        <span>Wired Bass Earphones</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro5.html">
-        <img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="Budget Mouse Pad">
-        <span>Budget Mouse Pad</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro6.html">
-        <img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png"  alt="Metal Portable Laptop Stand">
-        <span>Metal Portable Laptop Stand</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro7.html">
-        <img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="Shortcut Keyboard Mat">
-        <span>Shortcut Keyboard Mat</span>
-      </a>
-    </li>
-
-    <li>
-      <a href="pro8.html">
-        <img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="Wrist S Mouse Pad">
-        <span>Wrist S Mouse Pad</span>
-      </a>
-    </li>
-
+    <li><a href="#"><img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="cable"><span>3-in-1 Glow Data Cable</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="headset"><span>Wired Headset with Mic</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="earphone"><span>Wired Bass Earphones</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="mousepad"><span>Budget Mouse Pad</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png" alt="stand"><span>Metal Portable Laptop Stand</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="keymat"><span>Shortcut Keyboard Mat</span></a></li>
+    <li><a href="#"><img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="wristpad"><span>Wrist S Mouse Pad</span></a></li>
   </ul>
-
 </div>
 
 <nav class="navbar">  
   <div class="container nav-inner">  
     <div class="logo">Tech Force<span>Hot</span></div>  
     <div class="nav-buttons">  
-     <a href="pro4.html"> <button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i>Home </button>  </a>
-     <a href="pro4.html"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button>  </a>
-      <button class="nav-btn" id="moreProductsBtn"><a href="homepg2second.html"><i class="fas fa-compass"></i> More products</a></button>
+      <button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i>Home</button>
+      <button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button>
+      <button class="nav-btn" id="moreProductsBtn">More products</button>
     </div>  
     <div class="cart-icon"><i class="fas fa-cassette-tape"></i></div>  
   </div>  
@@ -540,7 +457,6 @@ window.addEventListener("load",()=>{
         <button class="btn-retro btn-primary" id="buyNowBtn">✨ Buy Now</button>  
         <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>  
       </div>  
-      <!-- Special Offers & Bank Deals Section -->  
       <div class="offers-card">  
         <div class="offers-header" id="offersToggle">  
           <span><i class="fas fa-tape"></i> 🔥 Special Offers & Bank Deals</span>  
@@ -548,7 +464,7 @@ window.addEventListener("load",()=>{
         </div>  
         <div class="offer-content" id="offerContent">  
           <p><i class="fas fa-rupee-sign"></i> <strong>Flash Price: ₹184</strong> (MRP ₹499)</p>  
-          <p><i class="fas fa-credit-card"></i> <strong>Bank Offer:</strong>Get ₹20 cashback on your first order</p>  
+          <p><i class="fas fa-credit-card"></i> <strong>Bank Offer:</strong> Get ₹20 cashback on your first order</p>  
           <p><i class="fas fa-boxes"></i> <strong>For bulk order enquire us for large discounts.</strong> <button class="btn-enquire" id="bulkEnquireBtn" style="padding: 4px 12px; font-size: 0.7rem; margin-left: 8px;">Enquire Now</button></p>  
           <p><i class="fas fa-truck"></i> <strong>Shipping charges will apply.</strong> (Calculated at checkout)</p>  
           <p><i class="fas fa-clock"></i> <strong>Order shipped securely within 3~10 business days</strong> · Trackable delivery</p>  
@@ -578,35 +494,26 @@ window.addEventListener("load",()=>{
 </main>  
 <footer>© 2026 Tech Force · Metal Portable Laptop Stand | 6‑angle adjustable riser for laptops, phones & tablets</footer>  
 
-<!-- Scroll to bottom notification popup -->  
-<div class="scroll-notification" id="scrollNotification">  
-  <i class="fas fa-gift"></i> You've reached the end! Get special offer →  
-</div>  
+<div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> You've reached the end! Get special offer →</div>  
+
+<!-- BUY POPUP HTML -->
+<div class="buy-popup" id="buyPopup">
+  <div class="popup-box">
+    <button class="close-popup" id="closePopup">✕</button>
+    <iframe id="popupFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+</div>
 
 <script>  
-  // Menu Toggle Logic (Step 4)
+  // Menu Toggle
   const menuToggle = document.getElementById("menuToggle");
   const sidebar = document.getElementById("sidebar");
   const overlay = document.getElementById("overlay");
+  menuToggle.onclick = (e) => { e.stopPropagation(); menuToggle.classList.toggle("active"); sidebar.classList.toggle("active"); overlay.classList.toggle("active"); };
+  overlay.onclick = () => { menuToggle.classList.remove("active"); sidebar.classList.remove("active"); overlay.classList.remove("active"); };
 
-  menuToggle.onclick = (e) => {
-    e.stopPropagation();
-    menuToggle.classList.toggle("active");
-    sidebar.classList.toggle("active");
-    overlay.classList.toggle("active");
-  };
-
-  overlay.onclick = () => {
-    menuToggle.classList.remove("active");
-    sidebar.classList.remove("active");
-    overlay.classList.remove("active");
-  };
-
+  // Gallery
   const productImages = [  
-    "https://deodap.in/cdn/shop/files/613w4Ka--bL._SL1500.jpg?v=1751024706",  
-    "https://deodap.in/cdn/shop/files/20902.png?v=1764322154",  
-    "https://deodap.in/cdn/shop/files/20900.png?v=1764322154",  
-    "https://deodap.in/cdn/shop/files/71gy3m4LMrL._SL1500.jpg?v=1764322148",  
     "https://deodap.in/cdn/shop/files/613w4Ka--bL._SL1500.jpg?v=1751024706",  
     "https://deodap.in/cdn/shop/files/20902.png?v=1764322154",  
     "https://deodap.in/cdn/shop/files/20900.png?v=1764322154",  
@@ -634,41 +541,25 @@ window.addEventListener("load",()=>{
   renderThumbnails();  
   mainImg.src = productImages[0];  
 
-  // Expand/collapse offers  
+  // Expand/collapse offers
   const offersToggle = document.getElementById('offersToggle');  
   const offerContentDiv = document.getElementById('offerContent');  
   const expandIcon = document.getElementById('expandIcon');  
   let isExpanded = true;  
   function toggleOffer() {  
-    if(isExpanded) {  
-      offerContentDiv.classList.add('collapsed');  
-      expandIcon.classList.remove('fa-chevron-down');  
-      expandIcon.classList.add('fa-chevron-up');  
-    } else {  
-      offerContentDiv.classList.remove('collapsed');  
-      expandIcon.classList.remove('fa-chevron-up');  
-      expandIcon.classList.add('fa-chevron-down');  
-    }  
+    if(isExpanded) { offerContentDiv.classList.add('collapsed'); expandIcon.classList.remove('fa-chevron-down'); expandIcon.classList.add('fa-chevron-up'); } 
+    else { offerContentDiv.classList.remove('collapsed'); expandIcon.classList.remove('fa-chevron-up'); expandIcon.classList.add('fa-chevron-down'); }  
     isExpanded = !isExpanded;  
   }  
   offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-  window.addEventListener('resize', () => { if(isExpanded) offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; });  
   offersToggle.addEventListener('click', () => {  
-    if(isExpanded) {  
-      offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-      setTimeout(() => { offerContentDiv.style.maxHeight = "0px"; }, 10);  
-    } else {  
-      offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-    }  
+    if(isExpanded) { offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; setTimeout(() => { offerContentDiv.style.maxHeight = "0px"; }, 10); } 
+    else { offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px"; }  
     toggleOffer();  
-    setTimeout(() => {  
-      if(!isExpanded) offerContentDiv.style.maxHeight = "0px";  
-      else offerContentDiv.style.maxHeight = "none";  
-    }, 350);  
+    setTimeout(() => { if(!isExpanded) offerContentDiv.style.maxHeight = "0px"; else offerContentDiv.style.maxHeight = "none"; }, 350);  
   });  
-  offerContentDiv.classList.remove('collapsed');  
 
-  // Countdown timer  
+  // Countdown
   let countdownInterval;  
   function startCountdown(secondsLeft = 86400) {  
     let remaining = secondsLeft;  
@@ -685,144 +576,96 @@ window.addEventListener("load",()=>{
     updateTimer();  
     countdownInterval = setInterval(updateTimer, 1000);  
   }  
-  startCountdown(23*3600 + 59*60 + 59);  
+  startCountdown(99*3600 + 59*60 + 59);  
 
-  // Buy Now button - opens Tally form  
-  const buyBtn = document.getElementById('buyNowBtn');  
+  // ----- POPUP LOGIC: BUY NOW OPENS TALLY FORM IN MODAL -----
+  const buyBtn = document.getElementById('buyNowBtn');
+  const buyPopup = document.getElementById('buyPopup');
+  const popupFrame = document.getElementById('popupFrame');
+  const closePopupBtn = document.getElementById('closePopup');
+  const TALLY_LINK = "https://tally.so/r/rjr7ov";
+
+  function createRipple(e, btn) {
+    const ripple = document.createElement('span');
+    ripple.style.position = 'absolute';
+    ripple.style.backgroundColor = 'rgba(0,0,0,0.1)';
+    ripple.style.borderRadius = '50%';
+    ripple.style.transform = 'scale(0)';
+    ripple.style.width = ripple.style.height = '60px';
+    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;
+    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;
+    ripple.style.transition = 'transform 0.5s, opacity 0.5s';
+    ripple.style.pointerEvents = 'none';
+    btn.style.position = 'relative';
+    btn.style.overflow = 'hidden';
+    btn.appendChild(ripple);
+    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);
+    setTimeout(() => ripple.remove(), 500);
+  }
+
+  function openPopup() {
+    popupFrame.src = TALLY_LINK;
+    buyPopup.classList.add('show-popup');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePopup() {
+    buyPopup.classList.remove('show-popup');
+    setTimeout(() => { if(popupFrame.src) popupFrame.src = ""; }, 250);
+    document.body.style.overflow = '';
+  }
+
+  buyBtn.addEventListener('click', (e) => {
+    createRipple(e, buyBtn);
+    openPopup();
+  });
+
+  closePopupBtn.addEventListener('click', closePopup);
+  buyPopup.addEventListener('click', (e) => { if(e.target === buyPopup) closePopup(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && buyPopup.classList.contains('show-popup')) closePopup(); });
+
+  // Enquiry buttons
   const enquireBtn = document.getElementById('enquireBtn');  
-  const bulkEnquireBtn = document.getElementById('bulkEnquireBtn');  
-  function createRetroRipple(e, btn) {  
-    const ripple = document.createElement('span');  
-    ripple.style.position = 'absolute';  
-    ripple.style.backgroundColor = 'rgba(0,0,0,0.08)';  
-    ripple.style.borderRadius = '50%';  
-    ripple.style.transform = 'scale(0)';  
-    ripple.style.width = ripple.style.height = '60px';  
-    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;  
-    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;  
-    ripple.style.transition = 'transform 0.5s, opacity 0.5s';  
-    ripple.style.pointerEvents = 'none';  
-    btn.style.position = 'relative';  
-    btn.style.overflow = 'hidden';  
-    btn.appendChild(ripple);  
-    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);  
-    setTimeout(() => ripple.remove(), 500);  
-  }  
-  buyBtn.addEventListener('click', (e) => {  
-    createRetroRipple(e, buyBtn);  
-    window.open('https://tally.so/r/rjr7ov', '_blank');  
-  });  
+  const bulkEnquireBtn = document.getElementById('bulkEnquireBtn');
   function openEnquiry() {  
     window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%20Metal%20Portable%20Laptop%20Stand%20(6-angle)%20at%20₹184', '_blank');  
   }  
-  enquireBtn.addEventListener('click', (e) => {  
-    createRetroRipple(e, enquireBtn);  
-    openEnquiry();  
-  });  
-  if(bulkEnquireBtn) {  
-    bulkEnquireBtn.addEventListener('click', (e) => {  
-      createRetroRipple(e, bulkEnquireBtn);  
-      openEnquiry();  
-    });  
-  }  
+  enquireBtn.addEventListener('click', (e) => { createRipple(e, enquireBtn); openEnquiry(); });  
+  if(bulkEnquireBtn) { bulkEnquireBtn.addEventListener('click', (e) => { createRipple(e, bulkEnquireBtn); openEnquiry(); }); }  
 
-  // Home Button - scroll to top  
+  // Home / Explore / Cart
   const homeBtn = document.getElementById('homeBtn');  
-  homeBtn.addEventListener('click', () => {  
-    window.scrollTo({ top: 0, behavior: 'smooth' });  
-  });  
-
-  // Explore Button - scroll to features section  
+  homeBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });  
   const exploreBtn = document.getElementById('exploreBtn');  
-  exploreBtn.addEventListener('click', () => {  
-    document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' });  
-  });  
-
-  // Cart icon click  
+  exploreBtn.addEventListener('click', () => { document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' }); });  
   document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · enquire for bulk orders"));  
 
-  // ========== NEW FEATURE: Open link after 2 seconds when scroll to bottom ==========  
+  // Scroll bottom notification
   const scrollNotification = document.getElementById('scrollNotification');  
-  let bottomReached = false;  
-  let timeoutId = null;  
-  let notificationShown = false;  
-  let linkOpened = false;  
-
-  // The link to open when user scrolls to bottom  
+  let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;  
   const BOTTOM_LINK = 'https://tally.so/r/rjr7ov';  
-
   function handleScrollToBottom() {  
     const scrollPosition = window.scrollY + window.innerHeight;  
     const pageHeight = document.documentElement.scrollHeight;  
-    const threshold = 50; // pixels from bottom to trigger  
-    
+    const threshold = 50;  
     if (scrollPosition >= pageHeight - threshold) {  
       if (!bottomReached && !linkOpened) {  
         bottomReached = true;  
-        
-        // Show notification popup  
         if (!notificationShown) {  
           scrollNotification.classList.add('show');  
           notificationShown = true;  
-          
-          // Auto hide notification after 4 seconds  
-          setTimeout(() => {  
-            scrollNotification.classList.remove('show');  
-          }, 4000);  
+          setTimeout(() => { scrollNotification.classList.remove('show'); }, 4000);  
         }  
-        
-        // Set timeout to open link after 2 seconds  
         if (timeoutId) clearTimeout(timeoutId);  
-        timeoutId = setTimeout(() => {  
-          if (!linkOpened) {  
-            linkOpened = true;  
-            // Open the link in new tab  
-            window.open(BOTTOM_LINK, '_blank');  
-            // Optional: change notification text after opening  
-            scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →';  
-            scrollNotification.classList.add('show');  
-            setTimeout(() => {  
-              scrollNotification.classList.remove('show');  
-            }, 3000);  
-          }  
-        }, 2000);  
+        timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);  
       }  
-    } else {  
-      // Reset bottomReached when user scrolls back up, but don't reset linkOpened  
-      if (bottomReached && !linkOpened) {  
-        bottomReached = false;  
-        if (timeoutId) {  
-          clearTimeout(timeoutId);  
-          timeoutId = null;  
-        }  
-        // Hide notification if shown  
-        scrollNotification.classList.remove('show');  
-      }  
-    }  
+    } else { if (bottomReached && !linkOpened) { bottomReached = false; if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; } scrollNotification.classList.remove('show'); } }  
   }  
-
-  // Add click handler to notification - immediate open without waiting  
-  scrollNotification.addEventListener('click', () => {  
-    if (!linkOpened) {  
-      if (timeoutId) {  
-        clearTimeout(timeoutId);  
-        timeoutId = null;  
-      }  
-      linkOpened = true;  
-      window.open(BOTTOM_LINK, '_blank');  
-      scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks for visiting →';  
-      setTimeout(() => {  
-        scrollNotification.classList.remove('show');  
-      }, 3000);  
-    }  
-  });  
-
-  // Listen to scroll event  
+  scrollNotification.addEventListener('click', () => { if (!linkOpened) { if (timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks →'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });  
   window.addEventListener('scroll', handleScrollToBottom);  
-  // Also trigger on load to check initial position  
   setTimeout(handleScrollToBottom, 100);  
 
-  // Scroll fade animation  
+  // Fade animation
   const fadeElements = document.querySelectorAll('.fade-up');  
   const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });  
   fadeElements.forEach(el => observer.observe(el));  
