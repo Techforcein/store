@@ -20,6 +20,89 @@
 
   <!-- 3. CSS Styles including menu styles -->
   <style>  
+    /* BUY POPUP */
+
+.buy-popup{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.65);
+
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:.4s;
+
+  z-index:99999;
+}
+
+/* SHOW */
+
+.buy-popup.show-popup{
+  opacity:1;
+  visibility:visible;
+}
+
+/* BOX */
+
+.popup-box{
+  width:90%;
+  max-width:900px;
+  height:85vh;
+
+  background:white;
+
+  border-radius:25px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  box-shadow:
+  0 0 40px rgba(255,140,0,.35);
+}
+
+/* IFRAME */
+
+.popup-box iframe{
+  width:100%;
+  height:100%;
+}
+
+/* CLOSE BUTTON */
+
+.close-popup{
+  position:absolute;
+  top:15px;
+  right:15px;
+
+  width:42px;
+  height:42px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#ff6b00;
+
+  color:white;
+
+  font-size:20px;
+
+  cursor:pointer;
+
+  z-index:10;
+
+  box-shadow:
+  0 0 15px rgba(255,107,0,.45);
+}
     /* LOADER */
 
 #loader{
@@ -753,9 +836,30 @@
     setTimeout(() => ripple.remove(), 500);  
   }  
   buyBtn.addEventListener('click', (e) => {  
-    createRetroRipple(e, buyBtn);  
-    window.open('https://tally.so/r/2E1yjj', '_blank');  
-  });  
+  createRetroRipple(e, buyBtn);  
+
+  // SHOW POPUP
+  document.getElementById("buyPopup").classList.add("show-popup");
+
+  // CHANGE IFRAME LINK
+  document.getElementById("popupFrame").src =
+    "https://tally.so/r/VLvAPJ";
+});
+  // CLOSE POPUP
+
+document
+.getElementById("closePopup")
+.addEventListener("click",()=>{
+
+  document
+  .getElementById("buyPopup")
+  .classList.remove("show-popup");
+
+  // STOP IFRAME
+  document
+  .getElementById("popupFrame")
+  .src = "";
+});
   function openEnquiry() {  
     window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%203-in-1%20Glow%20Data%20Cable%20at%20₹149', '_blank');  
   }  
@@ -832,5 +936,26 @@
   fadeElements.forEach(el => observer.observe(el));  
   setTimeout(() => { if(!offerContentDiv.classList.contains('collapsed')) offerContentDiv.style.maxHeight = "none"; }, 200);  
 </script>  
+  <!-- BUY NOW POPUP -->
+
+<div class="buy-popup" id="buyPopup">
+
+  <div class="popup-box">
+
+    <!-- CLOSE BUTTON -->
+    <button class="close-popup" id="closePopup">
+      ✕
+    </button>
+
+    <!-- IFRAME -->
+    <iframe
+      id="popupFrame"
+      src=""
+      frameborder="0">
+    </iframe>
+
+  </div>
+
+</div>
 </body>  
 </html>
