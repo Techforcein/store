@@ -3,149 +3,40 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payment Form</title>
+
+  <title>Tech Force Form</title>
 
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
     }
 
+    html,
     body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #ffffff, #f5f5f5);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .container {
       width: 100%;
-      max-width: 900px;
+      height: 100%;
+      overflow: hidden;
       background: #ffffff;
-      border-radius: 22px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-      overflow: hidden;
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    .logo {
-      font-size: 34px;
-      font-weight: 800;
-      color: #111;
-      margin-bottom: 10px;
-    }
-
-    .logo span {
-      color: #8b5cf6;
-    }
-
-    .subtitle {
-      font-size: 16px;
-      color: #555;
-      margin-bottom: 25px;
-    }
-
-    .form-box {
-      width: 100%;
-      height: 600px;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid #ddd;
-      background: #fafafa;
     }
 
     iframe {
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       border: none;
-    }
-
-    .popup-btn {
-      margin-top: 25px;
-      padding: 14px 28px;
-      border: none;
-      border-radius: 50px;
-      background: #111;
-      color: #fff;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: 0.3s ease;
-    }
-
-    .popup-btn:hover {
-      background: #8b5cf6;
-      transform: scale(1.05);
-    }
-
-    .note {
-      margin-top: 18px;
-      font-size: 13px;
-      color: #777;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 20px 12px;
-      }
-
-      .logo {
-        font-size: 28px;
-      }
-
-      .form-box {
-        height: 650px;
-      }
+      display: block;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container">
-    <div class="logo">Tech <span>Force</span></div>
-    <p class="subtitle">Complete your details using the secure form below</p>
-
-    <!-- Embedded Tally Form -->
-    <div class="form-box">
-      <iframe 
-        src="https://tally.so/embed/EkAJDo?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-        loading="lazy" 
-        title="Tally Form">
-      </iframe>
-    </div>
-
-    <!-- Popup Button -->
-    <button class="popup-btn" data-tally-open="EkAJDo">
-      Open Form in Popup ₹
-    </button>
-
-    <p class="note">Your response will be submitted securely through Tally.</p>
-  </div>
-
-  <!-- Tally Popup Config -->
-  <script>
-    window.TallyConfig = {
-      formId: "EkAJDo",
-      popup: {
-        width: 400,
-        emoji: {
-          text: "₹",
-          animation: "wave"
-        },
-        layout: "modal",
-        autoClose: 2000,
-        formEventsForwarding: true
-      }
-    };
-  </script>
-
-  <script async src="https://tally.so/widgets/embed.js"></script>
+  <iframe
+    src="https://tally.so/r/EkAJDo"
+    title="Tech Force Tally Form"
+    loading="lazy">
+  </iframe>
 
 </body>
 </html>
