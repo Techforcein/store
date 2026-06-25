@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <!-- OLD FAVICON -->
+  <link rel="icon" type="image/png" href="https://i.ibb.co/0pNmcP53/TECH-FORCE-Logo.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
@@ -448,7 +450,7 @@
     .glass-btn:active { transform: scale(0.97); }
 
     /* ==============================================================
-       VIRTUAL TOUR PRODUCT SECTION (3D-like carousel)
+       VIRTUAL TOUR PRODUCT SECTION (includes preorder items)
        ============================================================== */
     .virtual-tour-section {
       padding: 3rem 1.5rem;
@@ -573,6 +575,11 @@
       border: 1px solid rgba(0, 229, 255, 0.06);
       text-transform: uppercase;
       margin-bottom: 0.3rem;
+    }
+    .tour-card .card-badge.preorder {
+      background: rgba(139, 92, 246, 0.12);
+      color: var(--accent-purple);
+      border-color: rgba(139, 92, 246, 0.10);
     }
     .tour-card h3 {
       font-size: 1.2rem;
@@ -1009,7 +1016,7 @@
       <li><a href="pro7.html"><img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="Keyboard Mat"><span>Shortcut Keyboard Mat</span></a></li>
       <li><a href="pro8.html"><img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="Wrist S Pad"><span>Wrist S Mouse Pad</span></a></li>
       
-      <!-- ================= PREORDER PRODUCTS (updated) ================= -->
+      <!-- ================= PREORDER PRODUCTS ================= -->
       <li class="section-title">🔥 Preorder</li>
 
       <li>
@@ -1097,7 +1104,7 @@
       </div>
     </div>
 
-    <!-- ===== VIRTUAL TOUR PRODUCT SECTION ===== -->
+    <!-- ===== VIRTUAL TOUR PRODUCT SECTION (includes preorder) ===== -->
     <section class="virtual-tour-section reveal">
       <div class="tour-header">
         <div>
@@ -1109,6 +1116,7 @@
 
       <div class="tour-carousel">
         <div class="tour-track" id="tourTrack">
+          <!-- Existing products -->
           <div class="tour-card">
             <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
             <div class="card-img"><img src="https://i.ibb.co/fdVN1vYD/02-f4f8952a-f74b-48a1-b337-0058ec492523.jpg" alt="cable"></div>
@@ -1179,6 +1187,92 @@
             <div class="actions">
               <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Buy</button>
               <a href="pro7.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+
+          <!-- ===== PREORDER PRODUCTS in Virtual Tour ===== -->
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="PRE-IMG/pre-pro1.png" alt="vlog kit"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>3 in 1 Vlog kit</h3>
+            <div class="price">₹2,499 <small>₹3,999</small></div>
+            <p class="desc">Complete vlogging setup with tripod, mic & light</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="pre-pro1.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="PRE-IMG/pre-pro2.png" alt="tripod"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>Mini Tripod with Gimbal Ballhead</h3>
+            <div class="price">₹1,299 <small>₹2,199</small></div>
+            <p class="desc">Compact, lightweight, 360° ballhead for smooth pans</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="pre-pro2.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="PRE-IMG/pre-pro3.png" alt="xl tripod"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>XL Pro Tripod</h3>
+            <div class="price">₹3,499 <small>₹5,999</small></div>
+            <p class="desc">Heavy-duty, 6ft height, professional grade</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="pre-order3.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="PRE-IMG/pre-pro4.png" alt="laptop bag"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>Laptop Bag – Scratch Guard</h3>
+            <div class="price">₹899 <small>₹1,499</small></div>
+            <p class="desc">Waterproof, padded, scratch-resistant interior</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="pre-pro4.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="PRE-IMG/pre-pro5.png" alt="gorilla pod"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>Gorilla Pod 6</h3>
+            <div class="price">₹1,699 <small>₹2,799</small></div>
+            <p class="desc">Flexible legs, 6kg load capacity, universal mount</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="prepr5.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="x&y-series/image-removebg-preview (2).png" alt="self stirring mug"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>Self Stirring Mug</h3>
+            <div class="price">₹1,199 <small>₹1,999</small></div>
+            <p class="desc">Automatic stirring, USB rechargeable, sleek design</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="pre-pro6.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
+            </div>
+          </div>
+          <div class="tour-card">
+            <div class="view-360"><i class="fas fa-rotate"></i> 360°</div>
+            <div class="card-img"><img src="x&y-series/image-removebg-preview (1).png" alt="smart stirring mug"></div>
+            <span class="card-badge preorder">🔮 preorder</span>
+            <h3>Smart Stirring Mug</h3>
+            <div class="price">₹1,499 <small>₹2,499</small></div>
+            <p class="desc">Temperature control, auto-stir, LED display</p>
+            <div class="actions">
+              <button class="glass-btn add-tour-cart" style="flex:1;"><i class="fas fa-shopping-cart"></i> Preorder</button>
+              <a href="pre-pro7.html" target="_blank" class="glass-btn" style="flex:0.6;">View</a>
             </div>
           </div>
         </div>
@@ -1456,7 +1550,7 @@
     revealElements.forEach(el => observer.observe(el));
 
     gsap.registerPlugin(ScrollTrigger);
-    console.log('✨ Glassmorphism UI with updated Preorder products & index.html link');
+    console.log('✨ Glassmorphism UI with Preorder products in Virtual Tour & old favicon');
   </script>
 </body>
 </html>
