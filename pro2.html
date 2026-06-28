@@ -1,22 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">  
-  
-  <title>Tech Force | Shop</title>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Tech Force | Shop</title>
 
   <!-- Website Logo / Favicon -->
   <link rel="icon" type="image/png" href="https://i.ibb.co/0pNmcP53/TECH-FORCE-Logo.png">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet">  
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Mono:wght@400;700&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
-  <style>  
+  <style>
     /* ----- GLASSMORPHISM DESIGN SYSTEM - WHITE THEME with RED & YELLOW ----- */
     :root {
       --glass-bg: rgba(255, 255, 255, 0.15);
@@ -33,12 +32,12 @@
       --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }  
-    
-    body {  
-      font-family: 'Inter', sans-serif;  
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
       background: var(--bg-white);
-      color: var(--text-primary);  
+      color: var(--text-primary);
       scroll-behavior: smooth;
       min-height: 100vh;
       overflow-x: hidden;
@@ -515,20 +514,18 @@
     }
     .zoom-area {
       overflow: hidden;
-      cursor: zoom-in;
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.4);
+      position: relative;
     }
-    #mainProductImg {
+    #mainDisplay {
       width: 100%;
       display: block;
-      transition: transform 0.4s ease;
-      filter: contrast(1.02) brightness(1.02);
+      border-radius: 12px;
+      background: #000;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
     }
-    .zoom-area:hover #mainProductImg {
-      transform: scale(1.03);
-    }
-
     .thumbnails {
       display: flex;
       gap: 12px;
@@ -885,8 +882,8 @@
       * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
   </style>
-</head>  
-<body>  
+</head>
+<body>
 
   <!-- Background Blobs -->
   <div class="bg-blobs"><span></span><span></span><span></span></div>
@@ -931,102 +928,105 @@
   </div>
 
   <!-- NAVBAR -->
-  <nav class="navbar">  
-    <div class="nav-inner">  
-      <div class="logo">Tech Force<span>Gamer's choice</span></div>  
-      <div class="nav-buttons">  
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="logo">Tech Force<span>Gamer's choice</span></div>
+      <div class="nav-buttons">
         <a href="index.html"><button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i> Home</button></a>
         <a href="index.html"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button></a>
-      </div>  
-      <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>  
-    </div>  
-  </nav>  
+      </div>
+      <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+    </div>
+  </nav>
 
   <!-- MAIN CONTENT -->
-  <main class="container">  
-    <div class="product-main fade-up">  
-      <div class="gallery">  
-        <div class="main-img-card">  
-          <div class="zoom-area"><img id="mainProductImg" src="https://i.ibb.co/jvM4YmPF/07-edb0d688-4aaa-43c1-9208-6d8157da46ce.jpg" alt="Wired Headset with Mic"></div>  
-          <div class="thumbnails" id="thumbnailsContainer"></div>  
-        </div>  
-      </div>  
-      <div class="details">  
-        <h1 class="product-title">Wired Headset with Mic – Noise-Isolating Boom Mic, Stereo Sound for Calls & Gaming</h1>  
-        <div class="rating-section">  
-          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>  
-          <div class="rating-score">4.5 / 5</div>  
-          <div class="rating-text"><i class="fas fa-users"></i> 1,950+ verified ratings</div>  
-        </div>  
-        <div class="price-block">  
-          <span class="discount-badge">🔥 50% OFF</span>  
-          <span class="old-price">₹1,599</span>  
-          <span class="new-price">₹840</span>  
-          <div>incl. GST (18%) · Made in India · 1 Year Warranty</div>  
-        </div>  
-        <div class="action-buttons">  
-          <button class="btn-retro btn-primary" id="buyNowBtn">🎧 Buy Now</button>  
-          <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>  
-        </div>  
-        <div class="offers-card">  
-          <div><i class="fas fa-headphones" style="color:var(--accent-red);"></i> <strong>🎙️ Product Description</strong></div>  
-          <div style="margin-top: 12px; line-height: 1.6; color: var(--text-secondary);">High-quality stereo sound with enhanced voice clarity. Integrated boom mic with noise-isolation for clear calling. Adjustable headband for a comfortable, secure fit. Soft padded earcups provide prolonged wear comfort. Durable construction with tangle-resistant wired connection. Compatible with desktops, laptops, tablets, and select smartphones. Ideal for video conferencing, online classes, gaming, and more.</div>  
-        </div>  
-        <div class="offers-card">  
-          <div class="offers-header" id="offersToggle"><span><i class="fas fa-tape"></i> 🔥 Key Features</span><i class="fas fa-chevron-down expand-icon" id="expandIcon"></i></div>  
-          <div class="offer-content" id="offerContent">  
-            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>High-quality stereo sound</strong> with enhanced voice clarity</p>  
-            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Integrated boom mic with noise-isolation</strong> for clear calling</p>  
-            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Adjustable headband</strong> for a comfortable, secure fit</p>  
-            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Soft padded earcups</strong> provide prolonged wear comfort</p>  
-            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Durable construction</strong> with tangle-resistant wired connection</p>  
-            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Compatible with desktops, laptops, tablets, and select smartphones</strong></p>  
-          </div>  
-        </div>  
-        <div class="offers-card" style="margin-top: 0;">  
-          <div><i class="fas fa-microchip" style="color:var(--accent-red);"></i> <strong>📋 Specifications</strong></div>  
-          <div class="specs-grid">  
-            <div class="spec-item"><span class="spec-label">Product Name:</span><span class="spec-value">Wired Headset</span></div>  
-            <div class="spec-item"><span class="spec-label">Type:</span><span class="spec-value">On-ear wired headset with mic</span></div>  
-            <div class="spec-item"><span class="spec-label">Microphone:</span><span class="spec-value">Adjustable boom mic with noise isolation</span></div>  
-            <div class="spec-item"><span class="spec-label">Audio Quality:</span><span class="spec-value">Stereo sound with clear voice output</span></div>  
-            <div class="spec-item"><span class="spec-label">Earcups:</span><span class="spec-value">Padded cushions for comfort</span></div>  
-            <div class="spec-item"><span class="spec-label">Headband:</span><span class="spec-value">Adjustable and flexible</span></div>  
-            <div class="spec-item"><span class="spec-label">Compatibility:</span><span class="spec-value">Windows/Mac systems, tablets, smartphones</span></div>  
-            <div class="spec-item"><span class="spec-label">Country of Origin:</span><span class="spec-value">India</span></div>  
-          </div>  
-          <div class="countdown" id="countdownTimer">⏳ Launch sale ends: 23h 59m 59s</div>  
-        </div>  
-      </div>  
-    </div>  
-    <div class="offers-card fade-up" style="margin: 0 0 24px 0;">  
-      <div><i class="fas fa-thumbs-up" style="color:var(--accent-red);"></i> <strong>🎯 Ideal For</strong></div>  
-      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px;">  
-        <span class="keyword-tag"><i class="fas fa-home"></i> Work-from-home setups</span>  
-        <span class="keyword-tag"><i class="fas fa-graduation-cap"></i> Online learning</span>  
-        <span class="keyword-tag"><i class="fas fa-headset"></i> Call center operations</span>  
-        <span class="keyword-tag"><i class="fas fa-gamepad"></i> Gaming & multimedia</span>  
-      </div>  
-    </div>  
-    <div class="highlights-grid fade-up">  
-      <div class="hl-item"><i class="fas fa-volume-up"></i><span>Stereo Sound</span></div>  
-      <div class="hl-item"><i class="fas fa-microphone-alt"></i><span>Noise-Isolating Mic</span></div>  
-      <div class="hl-item"><i class="fas fa-sliders-h"></i><span>Adjustable Headband</span></div>  
-      <div class="hl-item"><i class="fas fa-feather"></i><span>Lightweight</span></div>  
-      <div class="hl-item"><i class="fas fa-plug"></i><span>Tangle-Resistant</span></div>  
-    </div>  
-    <div class="keyword-cloud fade-up">  
-      <span class="keyword-tag">wired headset</span>  
-      <span class="keyword-tag">gaming headset</span>  
-      <span class="keyword-tag">call center headset</span>  
-      <span class="keyword-tag">headphone with mic</span>  
-      <span class="keyword-tag">boom mic headset</span>  
-    </div>  
-  </main>  
+  <main class="container">
+    <div class="product-main fade-up">
+      <div class="gallery">
+        <div class="main-img-card">
+          <div class="zoom-area">
+            <!-- Main display: video or image -->
+            <video id="mainDisplay" src="c:\Users\maury\Downloads\Untitled design (5).mp4" autoplay loop muted playsinline></video>
+          </div>
+          <div class="thumbnails" id="thumbnailsContainer"></div>
+        </div>
+      </div>
+      <div class="details">
+        <h1 class="product-title">Wired Headset with Mic – Noise-Isolating Boom Mic, Stereo Sound for Calls & Gaming</h1>
+        <div class="rating-section">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+          <div class="rating-score">4.5 / 5</div>
+          <div class="rating-text"><i class="fas fa-users"></i> 1,950+ verified ratings</div>
+        </div>
+        <div class="price-block">
+          <span class="discount-badge">🔥 50% OFF</span>
+          <span class="old-price">₹1,599</span>
+          <span class="new-price">₹840</span>
+          <div>incl. GST (18%) · Made in India · 1 Year Warranty</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn-retro btn-primary" id="buyNowBtn">🎧 Buy Now</button>
+          <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>
+        </div>
+        <div class="offers-card">
+          <div><i class="fas fa-headphones" style="color:var(--accent-red);"></i> <strong>🎙️ Product Description</strong></div>
+          <div style="margin-top: 12px; line-height: 1.6; color: var(--text-secondary);">High-quality stereo sound with enhanced voice clarity. Integrated boom mic with noise-isolation for clear calling. Adjustable headband for a comfortable, secure fit. Soft padded earcups provide prolonged wear comfort. Durable construction with tangle-resistant wired connection. Compatible with desktops, laptops, tablets, and select smartphones. Ideal for video conferencing, online classes, gaming, and more.</div>
+        </div>
+        <div class="offers-card">
+          <div class="offers-header" id="offersToggle"><span><i class="fas fa-tape"></i> 🔥 Key Features</span><i class="fas fa-chevron-down expand-icon" id="expandIcon"></i></div>
+          <div class="offer-content" id="offerContent">
+            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>High-quality stereo sound</strong> with enhanced voice clarity</p>
+            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Integrated boom mic with noise-isolation</strong> for clear calling</p>
+            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Adjustable headband</strong> for a comfortable, secure fit</p>
+            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Soft padded earcups</strong> provide prolonged wear comfort</p>
+            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Durable construction</strong> with tangle-resistant wired connection</p>
+            <p><i class="fas fa-check-circle" style="color:var(--accent-red);"></i> <strong>Compatible with desktops, laptops, tablets, and select smartphones</strong></p>
+          </div>
+        </div>
+        <div class="offers-card" style="margin-top: 0;">
+          <div><i class="fas fa-microchip" style="color:var(--accent-red);"></i> <strong>📋 Specifications</strong></div>
+          <div class="specs-grid">
+            <div class="spec-item"><span class="spec-label">Product Name:</span><span class="spec-value">Wired Headset</span></div>
+            <div class="spec-item"><span class="spec-label">Type:</span><span class="spec-value">On-ear wired headset with mic</span></div>
+            <div class="spec-item"><span class="spec-label">Microphone:</span><span class="spec-value">Adjustable boom mic with noise isolation</span></div>
+            <div class="spec-item"><span class="spec-label">Audio Quality:</span><span class="spec-value">Stereo sound with clear voice output</span></div>
+            <div class="spec-item"><span class="spec-label">Earcups:</span><span class="spec-value">Padded cushions for comfort</span></div>
+            <div class="spec-item"><span class="spec-label">Headband:</span><span class="spec-value">Adjustable and flexible</span></div>
+            <div class="spec-item"><span class="spec-label">Compatibility:</span><span class="spec-value">Windows/Mac systems, tablets, smartphones</span></div>
+            <div class="spec-item"><span class="spec-label">Country of Origin:</span><span class="spec-value">India</span></div>
+          </div>
+          <div class="countdown" id="countdownTimer">⏳ Launch sale ends: 23h 59m 59s</div>
+        </div>
+      </div>
+    </div>
+    <div class="offers-card fade-up" style="margin: 0 0 24px 0;">
+      <div><i class="fas fa-thumbs-up" style="color:var(--accent-red);"></i> <strong>🎯 Ideal For</strong></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px;">
+        <span class="keyword-tag"><i class="fas fa-home"></i> Work-from-home setups</span>
+        <span class="keyword-tag"><i class="fas fa-graduation-cap"></i> Online learning</span>
+        <span class="keyword-tag"><i class="fas fa-headset"></i> Call center operations</span>
+        <span class="keyword-tag"><i class="fas fa-gamepad"></i> Gaming & multimedia</span>
+      </div>
+    </div>
+    <div class="highlights-grid fade-up">
+      <div class="hl-item"><i class="fas fa-volume-up"></i><span>Stereo Sound</span></div>
+      <div class="hl-item"><i class="fas fa-microphone-alt"></i><span>Noise-Isolating Mic</span></div>
+      <div class="hl-item"><i class="fas fa-sliders-h"></i><span>Adjustable Headband</span></div>
+      <div class="hl-item"><i class="fas fa-feather"></i><span>Lightweight</span></div>
+      <div class="hl-item"><i class="fas fa-plug"></i><span>Tangle-Resistant</span></div>
+    </div>
+    <div class="keyword-cloud fade-up">
+      <span class="keyword-tag">wired headset</span>
+      <span class="keyword-tag">gaming headset</span>
+      <span class="keyword-tag">call center headset</span>
+      <span class="keyword-tag">headphone with mic</span>
+      <span class="keyword-tag">boom mic headset</span>
+    </div>
+  </main>
 
-  <footer>© 2026 Techforce technologies · Wired Headset with Mic | Noise-Isolating Boom Mic | Stereo Sound | Made in India</footer>  
+  <footer>© 2026 Techforce technologies · Wired Headset with Mic | Noise-Isolating Boom Mic | Stereo Sound | Made in India</footer>
 
-  <div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> You've reached the end! Get special offer →</div>  
+  <div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> You've reached the end! Get special offer →</div>
 
   <!-- BUY NOW POPUP -->
   <div class="buy-popup" id="buyPopup">
@@ -1036,7 +1036,7 @@
     </div>
   </div>
 
-  <script>  
+  <script>
     // ----- LOADER -----
     window.addEventListener('load', () => {
       setTimeout(() => {
@@ -1078,85 +1078,197 @@
       overlay.classList.remove("active");
     };
 
-    // ----- PRODUCT GALLERY -----
-    const productImages = [  
-      "https://i.ibb.co/jvM4YmPF/07-edb0d688-4aaa-43c1-9208-6d8157da46ce.jpg",  
-      "https://i.ibb.co/DH8gb7fB/05-606f822e-0fc5-4d18-9c65-f62e7bffc480.jpg",  
-      "https://i.ibb.co/xt2R5J4v/04-53ff9077-7cc2-4be3-b219-6716833dd53f.jpg",  
-      "https://i.ibb.co/FkRG79NZ/01-fcbc8ddd-792d-4579-a79e-3c809285087c.jpg",  
-      "https://i.ibb.co/HT2xJ9Sn/03-9cf55b6f-497b-4110-8c35-4edf78364951.jpg"  
-    ];  
-    let currentImageIndex = 0;  
-    const mainImg = document.getElementById('mainProductImg');  
-    const thumbContainer = document.getElementById('thumbnailsContainer');  
-    
-    function renderThumbnails() {  
-      thumbContainer.innerHTML = '';  
-      productImages.forEach((src, idx) => {  
-        const thumb = document.createElement('img');  
-        thumb.src = src;  
-        thumb.classList.add('thumb');  
-        if(idx === currentImageIndex) thumb.classList.add('active');  
-        thumb.addEventListener('click', () => {  
-          mainImg.src = src;  
-          document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));  
-          thumb.classList.add('active');  
-          currentImageIndex = idx;  
-        });  
-        thumbContainer.appendChild(thumb);  
-      });  
-    }  
-    renderThumbnails();  
-    mainImg.src = productImages[0];  
+    // ----- MAIN DISPLAY (Video + Image switching) -----
+    const mainDisplay = document.getElementById('mainDisplay');
+    const productImages = [
+      "https://i.ibb.co/jvM4YmPF/07-edb0d688-4aaa-43c1-9208-6d8157da46ce.jpg",
+      "https://i.ibb.co/DH8gb7fB/05-606f822e-0fc5-4d18-9c65-f62e7bffc480.jpg",
+      "https://i.ibb.co/xt2R5J4v/04-53ff9077-7cc2-4be3-b219-6716833dd53f.jpg",
+      "https://i.ibb.co/FkRG79NZ/01-fcbc8ddd-792d-4579-a79e-3c809285087c.jpg",
+      "https://i.ibb.co/HT2xJ9Sn/03-9cf55b6f-497b-4110-8c35-4edf78364951.jpg"
+    ];
+    // First thumbnail is the video, rest are images
+    const thumbData = [
+      { type: 'video', src: "C:\\Users\\maury\\Downloads\\Headphone_rotating_on_transparen…_202606281232.mp4" },
+      ...productImages.map(src => ({ type: 'image', src }))
+    ];
+
+    const thumbContainer = document.getElementById('thumbnailsContainer');
+    let activeIndex = 0;
+
+    function renderThumbnails() {
+      thumbContainer.innerHTML = '';
+      thumbData.forEach((item, idx) => {
+        const thumb = document.createElement('img');
+        // For video thumbnail, use first image as placeholder
+        if (item.type === 'video') {
+          thumb.src = productImages[0]; // placeholder
+        } else {
+          thumb.src = item.src;
+        }
+        thumb.classList.add('thumb');
+        if (idx === activeIndex) thumb.classList.add('active');
+        thumb.addEventListener('click', () => {
+          setMainDisplay(idx);
+        });
+        thumbContainer.appendChild(thumb);
+      });
+    }
+
+    function setMainDisplay(index) {
+      const item = thumbData[index];
+      if (!item) return;
+      activeIndex = index;
+      // Update active class
+      document.querySelectorAll('.thumb').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+
+      if (item.type === 'video') {
+        // Switch to video
+        mainDisplay.src = item.src;
+        mainDisplay.loop = true;
+        mainDisplay.muted = true;
+        mainDisplay.autoplay = true;
+        mainDisplay.playsInline = true;
+        mainDisplay.play().catch(() => {});
+      } else {
+        // Switch to image
+        // We need to change the element to an img or change src of video? 
+        // Easier: replace video with img temporarily or use a single element.
+        // We'll use the same element but we need to change tag. 
+        // Simpler: we create an img and replace video element.
+        const parent = mainDisplay.parentNode;
+        const newEl = document.createElement('img');
+        newEl.id = 'mainDisplay';
+        newEl.src = item.src;
+        newEl.style.width = '100%';
+        newEl.style.display = 'block';
+        newEl.style.borderRadius = '12px';
+        newEl.style.aspectRatio = '16 / 9';
+        newEl.style.objectFit = 'cover';
+        parent.replaceChild(newEl, mainDisplay);
+        // Update reference
+        window.mainDisplayEl = newEl;
+        // For next switch, we need to handle properly
+        // We'll store the current element type
+        mainDisplay.__type = 'image';
+        // Also add click to go back to video? We'll handle via thumbnail click.
+      }
+    }
+
+    // Override mainDisplay reference after replacement
+    // We'll use a function to get current display element
+    function getDisplayElement() {
+      return document.getElementById('mainDisplay') || mainDisplay;
+    }
+
+    // Patch setMainDisplay to handle both
+    const origSetMainDisplay = setMainDisplay;
+    setMainDisplay = function(index) {
+      const item = thumbData[index];
+      if (!item) return;
+      activeIndex = index;
+      document.querySelectorAll('.thumb').forEach((el, i) => {
+        el.classList.toggle('active', i === index);
+      });
+
+      const currentEl = document.getElementById('mainDisplay');
+      if (!currentEl) return;
+
+      if (item.type === 'video') {
+        // If current is image, replace with video
+        if (currentEl.tagName === 'IMG') {
+          const parent = currentEl.parentNode;
+          const video = document.createElement('video');
+          video.id = 'mainDisplay';
+          video.src = item.src;
+          video.autoplay = true;
+          video.loop = true;
+          video.muted = true;
+          video.playsInline = true;
+          video.style.width = '100%';
+          video.style.display = 'block';
+          video.style.borderRadius = '12px';
+          video.style.aspectRatio = '16 / 9';
+          video.style.objectFit = 'cover';
+          parent.replaceChild(video, currentEl);
+          video.play().catch(() => {});
+        } else {
+          // already video, just change src
+          currentEl.src = item.src;
+          currentEl.load();
+          currentEl.play().catch(() => {});
+        }
+      } else {
+        // image
+        if (currentEl.tagName === 'VIDEO') {
+          const parent = currentEl.parentNode;
+          const img = document.createElement('img');
+          img.id = 'mainDisplay';
+          img.src = item.src;
+          img.style.width = '100%';
+          img.style.display = 'block';
+          img.style.borderRadius = '12px';
+          img.style.aspectRatio = '16 / 9';
+          img.style.objectFit = 'cover';
+          parent.replaceChild(img, currentEl);
+        } else {
+          currentEl.src = item.src;
+        }
+      }
+    };
+
+    renderThumbnails();
 
     // ----- EXPAND/COLLAPSE OFFERS -----
-    const offersToggle = document.getElementById('offersToggle');  
-    const offerContentDiv = document.getElementById('offerContent');  
-    const expandIcon = document.getElementById('expandIcon');  
-    let isExpanded = true;  
-    
-    function toggleOffer() {  
-      if(isExpanded) {  
-        offerContentDiv.classList.add('collapsed');  
-        expandIcon.classList.remove('fa-chevron-down');  
-        expandIcon.classList.add('fa-chevron-up');  
-      } else {  
-        offerContentDiv.classList.remove('collapsed');  
-        expandIcon.classList.remove('fa-chevron-up');  
-        expandIcon.classList.add('fa-chevron-down');  
-      }  
-      isExpanded = !isExpanded;  
-    }  
-    offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-    offersToggle.addEventListener('click', () => {  
-      if(isExpanded) {  
-        offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-        setTimeout(() => { offerContentDiv.style.maxHeight = "0px"; }, 10);  
-      } else {  
-        offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";  
-      }  
-      toggleOffer();  
-      setTimeout(() => { if(!isExpanded) offerContentDiv.style.maxHeight = "0px"; else offerContentDiv.style.maxHeight = "none"; }, 350);  
-    });  
+    const offersToggle = document.getElementById('offersToggle');
+    const offerContentDiv = document.getElementById('offerContent');
+    const expandIcon = document.getElementById('expandIcon');
+    let isExpanded = true;
+
+    function toggleOffer() {
+      if(isExpanded) {
+        offerContentDiv.classList.add('collapsed');
+        expandIcon.classList.remove('fa-chevron-down');
+        expandIcon.classList.add('fa-chevron-up');
+      } else {
+        offerContentDiv.classList.remove('collapsed');
+        expandIcon.classList.remove('fa-chevron-up');
+        expandIcon.classList.add('fa-chevron-down');
+      }
+      isExpanded = !isExpanded;
+    }
+    offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";
+    offersToggle.addEventListener('click', () => {
+      if(isExpanded) {
+        offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";
+        setTimeout(() => { offerContentDiv.style.maxHeight = "0px"; }, 10);
+      } else {
+        offerContentDiv.style.maxHeight = offerContentDiv.scrollHeight + "px";
+      }
+      toggleOffer();
+      setTimeout(() => { if(!isExpanded) offerContentDiv.style.maxHeight = "0px"; else offerContentDiv.style.maxHeight = "none"; }, 350);
+    });
 
     // ----- COUNTDOWN TIMER -----
-    let countdownInterval;  
-    function startCountdown(secondsLeft = 86400) {  
-      let remaining = secondsLeft;  
-      const timerElement = document.getElementById('countdownTimer');  
-      function updateTimer() {  
-        const hrs = Math.floor(remaining / 3600);  
-        const mins = Math.floor((remaining % 3600) / 60);  
-        const secs = remaining % 60;  
-        timerElement.innerHTML = `⏳ Launch sale ends: ${hrs.toString().padStart(2,'0')}h ${mins.toString().padStart(2,'0')}m ${secs.toString().padStart(2,'0')}s`;  
-        if(remaining <= 0) { clearInterval(countdownInterval); timerElement.innerHTML = "⚡ Deal expired! ⚡"; }  
-        remaining--;  
-      }  
-      if(countdownInterval) clearInterval(countdownInterval);  
-      updateTimer();  
-      countdownInterval = setInterval(updateTimer, 1000);  
-    }  
-    startCountdown(23*3600 + 59*60 + 59);  
+    let countdownInterval;
+    function startCountdown(secondsLeft = 86400) {
+      let remaining = secondsLeft;
+      const timerElement = document.getElementById('countdownTimer');
+      function updateTimer() {
+        const hrs = Math.floor(remaining / 3600);
+        const mins = Math.floor((remaining % 3600) / 60);
+        const secs = remaining % 60;
+        timerElement.innerHTML = `⏳ Launch sale ends: ${hrs.toString().padStart(2,'0')}h ${mins.toString().padStart(2,'0')}m ${secs.toString().padStart(2,'0')}s`;
+        if(remaining <= 0) { clearInterval(countdownInterval); timerElement.innerHTML = "⚡ Deal expired! ⚡"; }
+        remaining--;
+      }
+      if(countdownInterval) clearInterval(countdownInterval);
+      updateTimer();
+      countdownInterval = setInterval(updateTimer, 1000);
+    }
+    startCountdown(23*3600 + 59*60 + 59);
 
     // ----- BUY NOW POPUP (TALLY FORM) -----
     const buyBtn = document.getElementById('buyNowBtn');
@@ -1222,58 +1334,58 @@
 
     // ----- ENQUIRE (WhatsApp) -----
     const enquireBtn = document.getElementById('enquireBtn');
-    function openEnquiry() {  
-      window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%20Wired%20Headset%20with%20Mic%20at%20₹840', '_blank');  
-    }  
-    enquireBtn.addEventListener('click', (e) => {  
-      createRetroRipple(e, enquireBtn);  
-      openEnquiry();  
-    });  
+    function openEnquiry() {
+      window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%20Wired%20Headset%20with%20Mic%20at%20₹840', '_blank');
+    }
+    enquireBtn.addEventListener('click', (e) => {
+      createRetroRipple(e, enquireBtn);
+      openEnquiry();
+    });
 
     // ----- HOME & EXPLORE (now link to index.html) -----
     // Buttons already wrapped in <a href="index.html"> in HTML
 
-    document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · enquire for bulk orders"));  
+    document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · enquire for bulk orders"));
 
     // ----- SCROLL NOTIFICATION -----
-    const scrollNotification = document.getElementById('scrollNotification');  
-    let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;  
-    const BOTTOM_LINK = 'https://tally.so/r/rjr7ov';  
-    
-    function handleScrollToBottom() {  
-      const scrollPosition = window.scrollY + window.innerHeight;  
-      const pageHeight = document.documentElement.scrollHeight;  
-      const threshold = 50;  
-      if (scrollPosition >= pageHeight - threshold) {  
-        if (!bottomReached && !linkOpened) {  
-          bottomReached = true;  
-          if (!notificationShown) {  
-            scrollNotification.classList.add('show');  
-            notificationShown = true;  
-            setTimeout(() => { scrollNotification.classList.remove('show'); }, 4000);  
-          }  
-          if (timeoutId) clearTimeout(timeoutId);  
-          timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);  
-        }  
-      } else { if (bottomReached && !linkOpened) { bottomReached = false; if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; } scrollNotification.classList.remove('show'); } }  
-    }  
-    
-    scrollNotification.addEventListener('click', () => { if (!linkOpened) { if (timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks →'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });  
-    window.addEventListener('scroll', handleScrollToBottom);  
-    setTimeout(handleScrollToBottom, 100);  
+    const scrollNotification = document.getElementById('scrollNotification');
+    let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;
+    const BOTTOM_LINK = 'https://tally.so/r/rjr7ov';
+
+    function handleScrollToBottom() {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const threshold = 50;
+      if (scrollPosition >= pageHeight - threshold) {
+        if (!bottomReached && !linkOpened) {
+          bottomReached = true;
+          if (!notificationShown) {
+            scrollNotification.classList.add('show');
+            notificationShown = true;
+            setTimeout(() => { scrollNotification.classList.remove('show'); }, 4000);
+          }
+          if (timeoutId) clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Check new tab →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);
+        }
+      } else { if (bottomReached && !linkOpened) { bottomReached = false; if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; } scrollNotification.classList.remove('show'); } }
+    }
+
+    scrollNotification.addEventListener('click', () => { if (!linkOpened) { if (timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Offer opened! Thanks →'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });
+    window.addEventListener('scroll', handleScrollToBottom);
+    setTimeout(handleScrollToBottom, 100);
 
     // ----- FADE ANIMATION (Intersection Observer) -----
-    const fadeElements = document.querySelectorAll('.fade-up');  
-    const observer = new IntersectionObserver((entries) => { 
-      entries.forEach(entry => { 
-        if(entry.isIntersecting) { 
-          entry.target.classList.add('visible'); 
-          observer.unobserve(entry.target); 
-        } 
-      }); 
-    }, { threshold: 0.1 });  
-    fadeElements.forEach(el => observer.observe(el));  
-    setTimeout(() => { if(!offerContentDiv.classList.contains('collapsed')) offerContentDiv.style.maxHeight = "none"; }, 200);  
-  </script>  
-</body>  
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+    setTimeout(() => { if(!offerContentDiv.classList.contains('collapsed')) offerContentDiv.style.maxHeight = "none"; }, 200);
+  </script>
+</body>
 </html>
