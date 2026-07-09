@@ -15,7 +15,83 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    /* ========== LOADER ========== */
+    /* ========== GLASSMORPHISM DESIGN SYSTEM - WHITE THEME with RED & YELLOW ========== */
+    :root {
+      --glass-bg: rgba(255, 255, 255, 0.15);
+      --glass-border: rgba(255, 255, 255, 0.25);
+      --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+      --glass-blur: blur(20px);
+      --accent-red: #DC2626;
+      --accent-yellow: #FBBF24;
+      --text-primary: #1a1a2e;
+      --text-secondary: #4b5563;
+      --bg-white: #f8fafc;
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-white);
+      color: var(--text-primary);
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ----- Animated Glowing Blobs (background) ----- */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .bg-blobs span {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.06;
+      animation: blobFloat 22s infinite alternate ease-in-out;
+    }
+    .bg-blobs span:nth-child(1) {
+      width: 600px; height: 600px;
+      background: var(--accent-red);
+      top: -20%; left: -20%;
+      animation-duration: 25s;
+    }
+    .bg-blobs span:nth-child(2) {
+      width: 500px; height: 500px;
+      background: var(--accent-yellow);
+      bottom: -20%; right: -20%;
+      animation-duration: 30s;
+      animation-delay: -5s;
+    }
+    .bg-blobs span:nth-child(3) {
+      width: 400px; height: 400px;
+      background: #F97316;
+      top: 40%; left: 50%;
+      animation-duration: 20s;
+      animation-delay: -10s;
+    }
+    @keyframes blobFloat {
+      0% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(80px, -60px) scale(1.15); }
+      66% { transform: translate(-50px, 70px) scale(0.85); }
+      100% { transform: translate(30px, -30px) scale(1.05); }
+    }
+
+    /* ----- Glassmorphism Base ----- */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+    }
+
+    /* ========== LOADER (Glass) ========== */
     #loader {
       position: fixed;
       inset: 0;
@@ -24,77 +100,107 @@
       align-items: center;
       flex-direction: column;
       z-index: 99999;
-      background: rgba(5,5,5,.85);
-      backdrop-filter: blur(18px);
-      transition: .8s;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
     }
-    #loader::after {
-      content: "";
+    #loader.hide-loader {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+    .loader-ring {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top: 3px solid var(--accent-red);
+      border-right: 3px solid var(--accent-yellow);
+      animation: spinRing 1.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+      box-shadow: 0 0 40px rgba(220, 38, 38, 0.08);
+      position: relative;
+    }
+    .loader-ring::after {
+      content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at center, rgba(0,255,229,.1), rgba(0,0,0,.7));
-      z-index: -2;
+      inset: 12px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-bottom: 2px solid #F97316;
+      animation: spinRing 1.8s linear infinite reverse;
     }
-    #loader::before {
-      content: "";
-      position: absolute;
-      inset: 18px;
-      border-radius: 35px;
-      border: 2px solid rgba(0,255,229,.45);
-      box-shadow: 0 0 25px rgba(0,255,229,.5);
-      animation: borderGlow 4s linear infinite;
+    @keyframes spinRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-    .loader-gif {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 25px #00ffe5);
-    }
-    .loading-text {
-      margin-top: 22px;
-      color: white;
-      font-size: 14px;
-      letter-spacing: 5px;
+    .loader-text {
+      margin-top: 24px;
+      font-weight: 600;
+      letter-spacing: 6px;
       text-transform: uppercase;
-      text-shadow: 0 0 12px #00ffe5;
-      animation: textBlink 1.5s infinite;
+      font-size: 13px;
+      color: var(--accent-red);
     }
-    @keyframes borderGlow { 0% { filter: hue-rotate(0deg); } 100% { filter: hue-rotate(360deg); } }
-    @keyframes textBlink { 0%,100% { opacity: 1; } 50% { opacity: .4; } }
-    .hide-loader { opacity: 0; visibility: hidden; }
 
-    /* ========== BUY POPUP (TALLY) ========== */
+    /* ----- Floating Glass Particles ----- */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: rgba(220, 38, 38, 0.04);
+      border: 1px solid rgba(220, 38, 38, 0.05);
+      border-radius: 50%;
+      backdrop-filter: blur(4px);
+      animation: floatParticle 30s infinite alternate ease-in-out;
+    }
+    @keyframes floatParticle {
+      0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+      100% { transform: translate(100px, -150px) scale(1.8); opacity: 0.5; }
+    }
+
+    /* ========== BUY POPUP (Glass) ========== */
     .buy-popup {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.92);
-      backdrop-filter: blur(18px);
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       display: flex;
       justify-content: center;
       align-items: center;
       opacity: 0;
       visibility: hidden;
-      transition: .35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      transition: 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       z-index: 99999;
     }
     .buy-popup.show-popup { opacity: 1; visibility: visible; }
     .popup-box {
-      width: 90%;
-      max-width: 1000px;
+      width: 92%;
+      max-width: 920px;
       height: 85vh;
-      background: #0a0a1a;
-      border: 2px solid #00e5ff;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 28px;
       overflow: hidden;
       position: relative;
-      box-shadow: 0 0 0 2px rgba(0,229,255,0.2), 0 25px 45px rgba(0,0,0,0.5), 0 0 0 4px rgba(255,0,204,0.3);
-      animation: popupGlowPulse 2.2s infinite alternate;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.06);
+      animation: popupGlowPulse 3s infinite alternate;
     }
     @keyframes popupGlowPulse {
-      0% { box-shadow: 0 0 0 2px rgba(0,229,255,0.2),0 25px 45px rgba(0,0,0,0.5),0 0 0 4px rgba(255,0,204,0.2); }
-      100% { box-shadow: 0 0 0 4px rgba(0,229,255,0.5),0 30px 55px rgba(0,0,0,0.7),0 0 0 6px rgba(255,0,204,0.5); }
+      0% { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.04); }
+      100% { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.10), 0 0 40px rgba(220, 38, 38, 0.02); }
     }
-    .popup-box iframe { width: 100%; height: 100%; background: #fefefe; border: none; }
+    .popup-box iframe { width: 100%; height: 100%; background: #ffffff; border: none; }
     .close-popup {
       position: absolute;
       top: 16px;
@@ -102,47 +208,32 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      background: #ff00cc;
-      color: white;
+      background: rgba(220, 38, 38, 0.08);
+      backdrop-filter: blur(10px);
+      color: var(--accent-red);
       font-size: 22px;
       font-weight: bold;
       cursor: pointer;
       z-index: 20;
       transition: 0.2s;
-      box-shadow: 0 0 10px rgba(255,0,204,0.7);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: none;
+      border: 1px solid rgba(220, 38, 38, 0.08);
     }
-    .close-popup:hover { transform: scale(1.05); background: #00e5ff; color: #0a0a1a; box-shadow: 0 0 18px #00e5ff; }
+    .close-popup:hover { transform: scale(1.05); background: rgba(220, 38, 38, 0.12); border-color: var(--accent-red); }
 
-    /* ========== GLOBAL RETRO ========== */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', 'Space Mono', monospace;
-      background: #0a0a1a;
-      background-image: repeating-linear-gradient(45deg, rgba(0,255,200,0.02) 0px, rgba(0,255,200,0.02) 2px, transparent 2px, transparent 8px);
-      color: #e0e0e0;
-      scroll-behavior: smooth;
-    }
-    :root {
-      --retro-accent: #00e5ff;
-      --retro-card-bg: rgba(20, 20, 45, 0.96);
-      --retro-shadow: 8px 8px 0px rgba(0, 229, 255, 0.15);
-    }
-    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; }
-
-    /* ========== MENU SIDEBAR ========== */
+    /* ========== MENU SIDEBAR (Glass) ========== */
     .menu-toggle {
       position: fixed;
       top: 20px;
       left: 20px;
       width: 55px;
       height: 55px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(0,229,255,0.4);
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -150,159 +241,255 @@
       gap: 6px;
       cursor: pointer;
       z-index: 1002;
-      border-radius: 12px;
+      border-radius: 16px;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
     }
-    .menu-toggle span { width: 26px; height: 2px; background: #00e5ff; transition: 0.3s; }
+    .menu-toggle:hover { background: rgba(255, 255, 255, 0.8); border-color: var(--accent-red); }
+    .menu-toggle span {
+      width: 26px;
+      height: 2px;
+      background: var(--accent-red);
+      border-radius: 4px;
+      transition: 0.3s;
+    }
     .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
     .menu-toggle.active span:nth-child(2) { opacity: 0; }
     .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+    
     .overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       opacity: 0;
       visibility: hidden;
       transition: 0.4s;
       z-index: 999;
     }
     .overlay.active { opacity: 1; visibility: visible; }
+    
     .sidebar {
       position: fixed;
       top: 0;
       left: -100%;
       width: 100%;
+      max-width: 420px;
       height: 100vh;
       overflow-y: auto;
       padding: 100px 25px 40px;
       z-index: 1001;
-      background: rgba(10,10,30,0.92);
-      backdrop-filter: blur(20px);
-      transition: 0.5s ease;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-right: 1px solid rgba(255, 255, 255, 0.2);
+      transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     }
     .sidebar.active { left: 0; }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(220, 38, 38, 0.12); border-radius: 60px; }
+
     .nav-links {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
       list-style: none;
+      padding: 0;
     }
     .nav-links li {
-      background: rgba(0,229,255,0.08);
+      background: rgba(255, 255, 255, 0.5);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(0,229,255,0.3);
-      border-radius: 18px;
-      transition: 0.3s;
-      text-align: center;
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: var(--transition-smooth);
+      overflow: hidden;
     }
-    .nav-links li:hover { transform: translateY(-6px); border-color: #00e5ff; }
+    .nav-links li:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent-red);
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 12px 40px rgba(220, 38, 38, 0.04);
+    }
     .nav-links a {
       text-decoration: none;
-      color: #00e5ff;
+      color: var(--text-primary);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px 10px;
+      padding: 20px 12px;
+      transition: 0.3s;
     }
-    .nav-links img { width: 130px; height: 90px; object-fit: contain; margin-bottom: 12px; filter: brightness(0.95); }
-    .nav-links span { font-size: 14px; font-weight: 500; }
+    .nav-links a:hover { color: var(--accent-red); }
+    .nav-links img {
+      width: 120px;
+      height: 85px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.04));
+      transition: 0.3s;
+    }
+    .nav-links li:hover img { filter: drop-shadow(0 4px 12px rgba(220, 38, 38, 0.08)); }
+    .nav-links span {
+      font-size: 13px;
+      font-weight: 500;
+      text-align: center;
+      color: var(--text-secondary);
+      line-height: 1.3;
+    }
+    .nav-links .section-title {
+      grid-column: 1 / -1;
+      color: var(--accent-red);
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 12px 0 6px 0;
+      border-bottom: 2px solid var(--accent-yellow);
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-    /* ========== NAVBAR ========== */
+    /* ========== NAVBAR (Glass) ========== */
     .navbar {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: #0f0f23;
-      border-bottom: 4px solid var(--retro-accent);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
       padding: 12px 0;
     }
     @media (max-width: 640px) {
-      .nav-inner { padding-left: 60px; }
+      .nav-inner { padding-left: 70px; }
       .menu-toggle { top: 16px; left: 12px; width: 48px; height: 48px; }
+      .sidebar { max-width: 100%; padding: 90px 18px 30px; }
+      .nav-links { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; }
+      .nav-links img { width: 100px; height: 70px; }
     }
-    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
     .logo {
       font-family: 'VT323', monospace;
       font-size: 1.8rem;
-      color: #00e5ff;
-      text-shadow: 3px 3px 0 #ff00cc;
+      color: var(--accent-red);
+      letter-spacing: 1px;
     }
-    .logo span { font-size: 0.7rem; background: #00e5ff; padding: 2px 10px; border-radius: 30px; margin-left: 8px; color: #0f0f23; font-weight: bold; }
-    .nav-buttons { display: flex; gap: 16px; }
+    .logo span {
+      font-size: 0.7rem;
+      background: var(--accent-yellow);
+      padding: 2px 12px;
+      border-radius: 30px;
+      margin-left: 8px;
+      font-weight: bold;
+      color: var(--text-primary);
+    }
+    .nav-buttons { display: flex; gap: 12px; }
     .nav-btn {
-      background: #1a1a2e;
-      border: 2px solid #00e5ff;
-      padding: 8px 20px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 18px;
       font-weight: 700;
       cursor: pointer;
-      color: #00e5ff;
-      box-shadow: 3px 3px 0 #00e5ff;
+      color: var(--text-secondary);
+      border-radius: 60px;
       font-family: 'Space Mono', monospace;
+      transition: var(--transition-smooth);
     }
-    .nav-btn:hover { transform: translate(2px,2px); box-shadow: 1px 1px 0 #00e5ff; background: #00e5ff; color: #0f0f23; }
+    .nav-btn:hover { background: var(--accent-red); border-color: var(--accent-red); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(220, 38, 38, 0.1); }
     .cart-icon {
-      font-size: 1.3rem;
-      background: #1a1a2e;
+      font-size: 1.2rem;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
       width: 44px;
       height: 44px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 2px solid #00e5ff;
-      box-shadow: 3px 3px 0 #00e5ff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 60px;
       cursor: pointer;
-      color: #00e5ff;
+      color: var(--text-secondary);
+      transition: var(--transition-smooth);
     }
+    .cart-icon:hover { background: var(--accent-yellow); border-color: var(--accent-yellow); color: var(--text-primary); transform: translateY(-2px); }
 
-    /* ========== PRODUCT PAGE ========== */
+    /* ========== PRODUCT PAGE (Glass) ========== */
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
     .product-main { display: flex; flex-direction: column; gap: 40px; margin: 48px 0; }
     .gallery, .details { width: 100%; }
+
     .main-img-card {
-      background: var(--retro-card-bg);
-      border: 2px solid #00e5ff;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 24px;
       padding: 18px;
-      box-shadow: var(--retro-shadow);
+      box-shadow: 0 12px 48px rgba(0, 0, 0, 0.02);
       position: relative;
+      overflow: hidden;
     }
     .main-img-card::before {
       content: "📱 4-SECTION TRIPOD";
       position: absolute;
-      top: -12px;
-      left: 20px;
-      background: #00e5ff;
-      color: #0f0f23;
+      top: -8px;
+      left: 24px;
+      background: var(--accent-red);
+      color: #fff;
       font-family: 'Space Mono';
-      font-size: 0.7rem;
-      padding: 2px 12px;
+      font-size: 0.6rem;
+      padding: 4px 14px;
+      letter-spacing: 1px;
       z-index: 2;
-      font-weight: bold;
+      border-radius: 60px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
-    .zoom-area { overflow: hidden; cursor: zoom-in; border: 1px solid #00e5ff; }
-    #mainProductImg { width: 100%; display: block; transition: transform 0.3s; }
+    .zoom-area { overflow: hidden; cursor: zoom-in; border-radius: 16px; background: rgba(255, 255, 255, 0.4); }
+    #mainProductImg { width: 100%; display: block; transition: transform 0.4s ease; }
     .zoom-area:hover #mainProductImg { transform: scale(1.03); }
+
     .thumbnails { display: flex; gap: 12px; margin-top: 20px; overflow-x: auto; padding-bottom: 6px; }
+    .thumbnails::-webkit-scrollbar { height: 4px; }
+    .thumbnails::-webkit-scrollbar-thumb { background: rgba(220, 38, 38, 0.12); border-radius: 60px; }
     .thumb {
       width: 75px;
       height: 75px;
       object-fit: cover;
-      border: 3px solid #0f3460;
+      border-radius: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
-      filter: brightness(0.9);
+      filter: brightness(0.95);
       transition: 0.2s;
     }
-    .thumb.active, .thumb:hover { border-color: #00e5ff; filter: brightness(1); box-shadow: 0 0 0 2px #ff00cc; }
+    .thumb.active, .thumb:hover { border-color: var(--accent-red); filter: brightness(1); box-shadow: 0 0 20px rgba(220, 38, 38, 0.06); }
 
     .product-title {
       font-family: 'VT323', monospace;
       font-size: 2rem;
-      color: #00e5ff;
-      border-left: 6px solid #ff00cc;
+      color: var(--text-primary);
+      border-left: 4px solid var(--accent-red);
       padding-left: 16px;
       margin-bottom: 20px;
     }
     .rating-section {
-      background: #1a1a2e;
-      border: 2px solid #00e5ff;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
       padding: 12px 22px;
       display: flex;
       align-items: center;
@@ -310,19 +497,23 @@
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
-    .stars i { font-size: 1.2rem; }
-    .fa-star, .fa-star-half-alt { color: #ffd700; }
-    .rating-score { font-size: 1.3rem; font-weight: 800; color: #00e5ff; }
+    .stars i { font-size: 1.1rem; color: var(--accent-yellow); }
+    .fa-star, .fa-star-half-alt { color: var(--accent-yellow); }
+    .rating-score { font-size: 1.2rem; font-weight: 800; color: var(--accent-red); }
     .price-block {
-      background: #1a1a2e;
-      border: 2px solid #00e5ff;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
       padding: 16px 22px;
       margin-bottom: 20px;
-      box-shadow: inset 0 0 0 1px #0f3460, 4px 4px 0 #00e5ff;
     }
-    .discount-badge { background: #ff00cc; color: #0f0f23; font-weight: 800; padding: 4px 12px; font-size: 0.75rem; display: inline-block; margin-right: 12px; }
-    .old-price { font-size: 1.2rem; text-decoration: line-through; color: #aaa; margin-right: 12px; }
-    .new-price { font-size: 2.2rem; font-weight: 800; color: #00e5ff; text-shadow: 2px 2px 0 #ff00cc; }
+    .discount-badge { background: var(--accent-red); color: #fff; font-weight: 800; padding: 4px 14px; font-size: 0.7rem; border-radius: 60px; display: inline-block; margin-right: 12px; font-family: monospace; }
+    .old-price { font-size: 1.1rem; text-decoration: line-through; color: var(--text-secondary); margin-right: 12px; }
+    .new-price { font-size: 2.2rem; font-weight: 800; color: var(--accent-red); letter-spacing: -1px; }
+    .price-block div { font-size: 0.7rem; color: var(--text-secondary); margin-top: 8px; }
+
     .action-buttons { display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0; }
     .btn-retro {
       flex: 1;
@@ -332,336 +523,434 @@
       cursor: pointer;
       font-family: 'Space Mono', monospace;
       border: none;
+      border-radius: 60px;
+      backdrop-filter: blur(8px);
       text-transform: uppercase;
+      min-width: 140px;
+      transition: var(--transition-smooth);
     }
-    .btn-primary { background: #ff00cc; color: #0f0f23; box-shadow: 4px 4px 0 #00e5ff; }
-    .btn-primary:active { transform: translate(2px,2px); box-shadow: 1px 1px 0 #00e5ff; }
-    .btn-enquire { background: transparent; border: 2px solid #ff00cc; color: #00e5ff; box-shadow: 3px 3px 0 #ff00cc; }
-    .btn-enquire:hover { background: #ff00cc; color: #0f0f23; }
+    .btn-primary { background: var(--accent-red); color: #fff; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.1); }
+    .btn-primary:hover { background: #B91C1C; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(220, 38, 38, 0.15); }
+    .btn-enquire { background: var(--accent-yellow); color: var(--text-primary); border: 1px solid rgba(255, 255, 255, 0.2); }
+    .btn-enquire:hover { background: #F59E0B; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(251, 191, 36, 0.15); }
 
     .offers-card {
-      background: #1a1a2e;
-      border: 2px solid #00e5ff;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
       padding: 18px 24px;
       margin: 24px 0;
-      transition: 0.2s;
+      transition: var(--transition-smooth);
     }
-    .specs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; margin-top: 16px; }
-    .spec-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #0f3460; padding: 8px 0; font-size: 0.85rem; }
-    .spec-label { font-weight: 700; color: #ff00cc; }
-    .keyword-cloud { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0; }
-    .keyword-tag { background: #1a1a2e; border: 1px solid #00e5ff; padding: 6px 16px; border-radius: 40px; font-size: 0.75rem; color: #00e5ff; }
-    .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px,1fr)); gap: 20px; margin: 40px 0; }
+    .offers-card:hover { background: rgba(255, 255, 255, 0.7); border-color: rgba(255, 255, 255, 0.3); }
+    .offers-card p { display: flex; align-items: center; gap: 8px; margin: 4px 0; color: var(--text-secondary); }
+    .offers-card p i { color: var(--accent-red); width: 20px; }
+
+    .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 16px; }
+    .spec-item { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(0, 0, 0, 0.04); padding: 8px 0; font-size: 0.85rem; }
+    .spec-label { font-weight: 700; color: var(--accent-red); }
+    .spec-value { color: var(--text-secondary); }
+    .countdown { font-weight: 700; background: rgba(255, 255, 255, 0.5); display: inline-block; padding: 8px 18px; font-size: 0.8rem; color: var(--accent-red); font-family: monospace; border-radius: 60px; border: 1px solid rgba(255, 255, 255, 0.2); margin-top: 16px; }
+
+    .keyword-cloud { display: flex; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+    .keyword-tag { background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 16px; border-radius: 60px; font-size: 0.75rem; color: var(--text-secondary); transition: var(--transition-smooth); }
+    .keyword-tag:hover { background: rgba(220, 38, 38, 0.04); border-color: var(--accent-red); color: var(--text-primary); }
+
+    .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 16px; margin: 40px 0; }
     .hl-item {
-      background: #1a1a2e;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
       padding: 18px 8px;
       text-align: center;
-      border: 2px solid #ff00cc;
-      box-shadow: 5px 5px 0 #00e5ff;
+      transition: var(--transition-smooth);
     }
-    .hl-item i { font-size: 2rem; color: #00e5ff; margin-bottom: 8px; }
-    .fade-up { opacity: 0; transform: translateY(20px); transition: 0.5s; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-    footer { text-align: center; padding: 30px; border-top: 2px double #00e5ff; font-size: 0.7rem; color: #888; margin-top: 20px; }
+    .hl-item:hover { background: rgba(255, 255, 255, 0.8); transform: translateY(-4px); border-color: var(--accent-red); }
+    .hl-item i { font-size: 2rem; color: var(--accent-red); margin-bottom: 8px; display: block; }
+    .hl-item span { font-size: 0.85rem; font-weight: 600; display: block; font-family: 'Space Mono'; color: var(--text-secondary); }
+
+    .fade-up { opacity: 0; transform: translateY(30px); filter: blur(4px); transition: opacity 0.7s cubic-bezier(0.23, 1, 0.32, 1), transform 0.7s cubic-bezier(0.23, 1, 0.32, 1), filter 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+
+    footer { text-align: center; padding: 30px; border-top: 1px solid rgba(0, 0, 0, 0.04); font-size: 0.7rem; color: var(--text-secondary); margin-top: 20px; }
     .scroll-notification {
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: #ff00cc;
-      color: #0f0f23;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-primary);
       padding: 12px 20px;
+      border-radius: 60px;
       font-family: 'Space Mono', monospace;
       font-weight: bold;
-      box-shadow: 4px 4px 0 #00e5ff;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
       z-index: 1000;
       transform: translateX(120%);
-      transition: transform 0.3s;
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
       cursor: pointer;
     }
     .scroll-notification.show { transform: translateX(0); }
+    .scroll-notification i { margin-right: 8px; color: var(--accent-red); }
+
     @media (min-width: 768px) {
       .product-main { flex-direction: row; gap: 48px; }
       .product-title { font-size: 2.4rem; }
       .thumb { width: 85px; height: 85px; }
     }
+    @media (max-width: 480px) {
+      .btn-retro { font-size: 0.75rem; min-width: 100px; }
+      .specs-grid { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
   </style>
 </head>
 <body>
 
-<div id="loader">
-  <img src="https://res.cloudinary.com/ds81x9uqr/image/upload/q_auto/f_auto/v1779530962/Loading_Dots_In_Yellow_2_drzyse.gif" class="loader-gif" alt="Loading">
-  <div class="loading-text">LOADING...</div>
-</div>
+  <!-- Background Blobs -->
+  <div class="bg-blobs"><span></span><span></span><span></span></div>
 
-<!-- Menu Toggle -->
-<div class="menu-toggle" id="menuToggle">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
-<div class="overlay" id="overlay"></div>
+  <!-- Floating Particles -->
+  <div class="particles" id="particles"></div>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-  <ul class="nav-links">
-    <!-- MAIN PRODUCTS -->
-    <li><a href="pro1.html"><img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="3-in-1 Glow Data Cable"><span>3-in-1 Glow Data Cable</span></a></li>
-    <li><a href="pro2.html"><img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="Wired Headset"><span>Wired Headset with Mic</span></a></li>
-    <li><a href="pro3.html"><img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="Bass Earphones"><span>Wired Bass Earphones</span></a></li>
-    <li><a href="pro5.html"><img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="Mouse Pad"><span>Budget Mouse Pad</span></a></li>
-    <li><a href="pro6.html"><img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png" alt="Laptop Stand"><span>Metal Portable Laptop Stand</span></a></li>
-    <li><a href="pro7.html"><img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="Keyboard Mat"><span>Shortcut Keyboard Mat</span></a></li>
-    <li><a href="pro8.html"><img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="Wrist S Pad"><span>Wrist S Mouse Pad</span></a></li>
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-ring"></div>
+    <div class="loader-text">Loading</div>
+  </div>
+
+  <!-- ========== MENU TOGGLE (Hamburger) ========== -->
+  <div class="menu-toggle" id="menuToggle">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <!-- ========== SIDEBAR ========== -->
+  <div class="sidebar" id="sidebar">
+    <ul class="nav-links">
+      <li><a href="#"><img src="https://i.ibb.co/H0WxB8K/01-196bdf70-ca1d-40e3-918e-84fb0c629f44-removebg-preview.png" alt="3-in-1 Glow Data Cable"><span>3-in-1 Glow Data Cable</span></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/svNWPkNj/07-edb0d688-4aaa-43c1-9208-6d8157da46ce-removebg-preview.png" alt="Wired Headset"><span>Wired Headset with Mic</span></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/Z6V1YPMW/Earphone-Bassbull-05-1-removebg-preview.png" alt="Bass Earphones"><span>Wired Bass Earphones</span></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/tPXFWxdb/mouse-pad-1-removebg-preview.png" alt="Mouse Pad"><span>Budget Mouse Pad</span></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/HTH6MLRc/20902-removebg-preview.png" alt="Laptop Stand"><span>Metal Portable Laptop Stand</span></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/TB7ydctt/01-fb5ef662-aa7d-4d1b-9c7f-f9b4383e5e0d-removebg-preview.png" alt="Keyboard Mat"><span>Shortcut Keyboard Mat</span></a></li>
+      <li><a href="#"><img src="https://i.ibb.co/NdLFxHms/08-6aa4e465-24ea-404f-bce7-5230487326e1-removebg-preview.png" alt="Wrist S Pad"><span>Wrist S Mouse Pad</span></a></li>
+      
+      <!-- PREORDER PRODUCTS SECTION -->
+      <li class="section-title">🔥 Preorder</li>
+      <li><a href="#"><img src="PRE-IMG/pre-pro1.png" alt="preorder"><span>3 in 1 Vlog kit</span></a></li>
+      <li><a href="#"><img src="PRE-IMG/pre-pro2.png" alt="preorder"><span>Mini Tripod with Gimbal Ballhead</span></a></li>
+      <li><a href="#"><img src="PRE-IMG/pre-pro3.png" alt="preorder"><span>XL Pro Tripod</span></a></li>
+      <li><a href="#"><img src="PRE-IMG/pre-pro4.png" alt="preorder"><span>Laptop Bag – Scratch Guard</span></a></li>
+      <li><a href="#"><img src="PRE-IMG/pre-pro5.png" alt="preorder"><span>Gorilla Pod 6</span></a></li>
+      <li><a href="#"><img src="x&y-series/image-removebg-preview (2).png" alt="preorder"><span>Self Stirring Mug</span></a></li>
+      <li><a href="#"><img src="x&y-series/image-removebg-preview (1).png" alt="preorder"><span>Smart Stirring Mug</span></a></li>
+    </ul>
+  </div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="logo">Tech Force<span>StablePro</span></div>
+      <div class="nav-buttons">
+        <a href="index.html"><button class="nav-btn" id="homeBtn"><i class="fas fa-home"></i> Home</button></a>
+        <a href="index.html"><button class="nav-btn" id="exploreBtn"><i class="fas fa-compass"></i> Explore</button></a>
+      </div>
+      <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+    </div>
+  </nav>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="container">
+    <div class="product-main fade-up">
+      <div class="gallery">
+        <div class="main-img-card">
+          <div class="zoom-area"><img id="mainProductImg" src="https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg" alt="4-Section Tripod with Mobile Holder"></div>
+          <div class="thumbnails" id="thumbnailsContainer"></div>
+        </div>
+      </div>
+      <div class="details">
+        <h1 class="product-title">4-Section Tripod with Mobile Holder & 3-Way Head – 360° Rotation, Aluminium Alloy, for YouTubers</h1>
+        <div class="rating-section">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <div class="rating-score">5.0 / 5</div>
+          <div class="rating-text"><i class="fas fa-users"></i> 6,120+ happy creators</div>
+        </div>
+        <div class="price-block">
+          <span class="discount-badge">🔥 Creator's Choice</span>
+          <span class="old-price">₹999</span>
+          <span class="new-price">₹299</span>
+          <div>incl. GST · 1 Year Warranty · Free Shipping</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn-retro btn-primary" id="buyNowBtn">🎥 Buy Now</button>
+          <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>
+        </div>
+        <div class="offers-card">
+          <div><i class="fas fa-video" style="color:var(--accent-red);"></i> <strong>✨ Complete Creator Kit</strong></div>
+          <div style="margin-top: 12px; color: var(--text-secondary);">This mobile tripod stand can be used with mobile for blogging, recording and making videos for YouTube by YouTubers. Comes with rotating ball head and holder for mobile — a complete accessories kit for video production.</div>
+        </div>
+        <div class="offers-card">
+          <div><i class="fas fa-list-ul" style="color:var(--accent-red);"></i> <strong>🔥 Key Features</strong></div>
+          <div style="margin-top: 12px;">
+            <p><i class="fas fa-check-circle"></i> <strong>3-Way Rotating Head</strong> – 360° panoramic photos & videos, vertical/horizontal angles</p>
+            <p><i class="fas fa-check-circle"></i> <strong>4-Section Legs + Extendable Column</strong> – Adjustable height for perfect framing</p>
+            <p><i class="fas fa-check-circle"></i> <strong>Ultra-Stable Base</strong> – 280° anti-slip rubber mats + weight hanging hook</p>
+            <p><i class="fas fa-check-circle"></i> <strong>Lightweight Aluminium Alloy</strong> – Durable, portable for hiking & camping</p>
+            <p><i class="fas fa-check-circle"></i> <strong>Universal 1/4" Screw + Phone Holder</strong> – Works with DSLR, GoPro, all iPhones & Android</p>
+          </div>
+        </div>
+        <div class="offers-card">
+          <div><i class="fas fa-ruler" style="color:var(--accent-red);"></i> <strong>📏 Technical Specifications & Dimensions</strong></div>
+          <div class="specs-grid">
+            <div class="spec-item"><span class="spec-label">Material:</span><span class="spec-value">High-Quality Aluminium Alloy</span></div>
+            <div class="spec-item"><span class="spec-label">Product Weight:</span><span class="spec-value">442 gm</span></div>
+            <div class="spec-item"><span class="spec-label">Shipping Weight:</span><span class="spec-value">492 gm</span></div>
+            <div class="spec-item"><span class="spec-label">Dimensions (LxBxH):</span><span class="spec-value">6 x 6 x 67 cm</span></div>
+            <div class="spec-item"><span class="spec-label">Leg Sections:</span><span class="spec-value">4 Sections</span></div>
+            <div class="spec-item"><span class="spec-label">Head Rotation:</span><span class="spec-value">360° 3-Way</span></div>
+            <div class="spec-item"><span class="spec-label">Screw Thread:</span><span class="spec-value">Standard 1/4"</span></div>
+            <div class="spec-item"><span class="spec-label">Country of Origin:</span><span class="spec-value">China</span></div>
+            <div class="spec-item"><span class="spec-label">GST:</span><span class="spec-value">18%</span></div>
+            <div class="spec-item"><span class="spec-label">Load Capacity:</span><span class="spec-value">Up to 3 kg</span></div>
+          </div>
+          <div class="countdown" id="countdownTimer">⏳ Flash sale ends: 23h 59m 59s</div>
+        </div>
+      </div>
+    </div>
     
-    <!-- PREORDER PRODUCTS SECTION -->
-    <li class="section-title">🔥 Preorder</li>
-    <li><a href="pre-pro1.html"><img src="PRE-IMG/pre-pro1.png" alt="preorder"><span>3 in 1 Vlog kit</span></a></li>
-    <li><a href="pre-pro2.html"><img src="PRE-IMG/pre-pro2.png" alt="preorder"><span>Mini Tripod with Gimbal Ballhead</span></a></li>
-    <li><a href="pre-order3.html"><img src="PRE-IMG/pre-pro3.png" alt="preorder"><span>XL Pro Tripod</span></a></li>
-    <li><a href="pre-pro4.html"><img src="PRE-IMG/pre-pro4.png" alt="preorder"><span>Laptop Bag – Scratch Guard</span></a></li>
-    <li><a href="prepr5.html"><img src="PRE-IMG/pre-pro5.png" alt="preorder"><span>Gorilla Pod 6</span></a></li>
-    <li><a href="pre-pro6.html"><img src="x&y-series/image-removebg-preview (2).png" alt="preorder"><span>Self Stirring Mug</span></a></li>
-    <li><a href="pre-pro7.html"><img src="x&y-series/image-removebg-preview (1).png" alt="preorder"><span>Smart Stirring Mug</span></a></li>
-  </ul>
-</div>
-<main class="container">
-  <div class="product-main fade-up">
-    <div class="gallery">
-      <div class="main-img-card">
-        <div class="zoom-area"><img id="mainProductImg" src="https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg" alt="4-Section Tripod with Mobile Holder"></div>
-        <div class="thumbnails" id="thumbnailsContainer"></div>
+    <div class="offers-card fade-up">
+      <div><i class="fas fa-rocket" style="color:var(--accent-red);"></i> <strong>🎯 Perfect For</strong></div>
+      <div class="keyword-cloud" style="margin-top:8px;">
+        <span class="keyword-tag"><i class="fab fa-youtube"></i> YouTube Vlogging</span>
+        <span class="keyword-tag"><i class="fas fa-chalkboard"></i> Online Teaching</span>
+        <span class="keyword-tag"><i class="fas fa-hiking"></i> Hiking & Camping</span>
+        <span class="keyword-tag"><i class="fas fa-camera"></i> Photography</span>
+        <span class="keyword-tag"><i class="fas fa-live"></i> Live Streaming</span>
       </div>
     </div>
-    <div class="details">
-      <h1 class="product-title">4-Section Tripod with Mobile Holder & 3-Way Head – 360° Rotation, Aluminium Alloy, for YouTubers</h1>
-      <div class="rating-section">
-        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-        <div class="rating-score">5.0 / 5</div>
-        <div class="rating-text"><i class="fas fa-users"></i> 6,120+ happy creators</div>
-      </div>
-      <div class="price-block">
-        <span class="discount-badge">🔥 Creator's Choice</span>
-        <span class="old-price">₹999</span>
-        <span class="new-price">₹299</span>
-        <div style="font-size:0.7rem; margin-top:8px;">incl. GST · 1 Year Warranty · Free Shipping</div>
-      </div>
-      <div class="action-buttons">
-        <button class="btn-retro btn-primary" id="buyNowBtn">🎥 Buy Now</button>
-        <button class="btn-retro btn-enquire" id="enquireBtn">📞 Enquire</button>
-      </div>
-      <div class="offers-card">
-        <div><i class="fas fa-video"></i> <strong>✨ Complete Creator Kit</strong></div>
-        <div style="margin-top: 12px;">This mobile tripod stand can be used with mobile for blogging, recording and making videos for YouTube by YouTubers. Comes with rotating ball head and holder for mobile — a complete accessories kit for video production.</div>
-      </div>
-      <div class="offers-card">
-        <div><i class="fas fa-list-ul"></i> <strong>🔥 Key Features</strong></div>
-        <div style="margin-top: 12px;">
-          <p><i class="fas fa-check-circle"></i> <strong>3-Way Rotating Head</strong> – 360° panoramic photos & videos, vertical/horizontal angles</p>
-          <p><i class="fas fa-check-circle"></i> <strong>4-Section Legs + Extendable Column</strong> – Adjustable height for perfect framing</p>
-          <p><i class="fas fa-check-circle"></i> <strong>Ultra-Stable Base</strong> – 280° anti-slip rubber mats + weight hanging hook</p>
-          <p><i class="fas fa-check-circle"></i> <strong>Lightweight Aluminium Alloy</strong> – Durable, portable for hiking & camping</p>
-          <p><i class="fas fa-check-circle"></i> <strong>Universal 1/4" Screw + Phone Holder</strong> – Works with DSLR, GoPro, all iPhones & Android</p>
-        </div>
-      </div>
-      <div class="offers-card">
-        <div><i class="fas fa-ruler"></i> <strong>📏 Technical Specifications & Dimensions</strong></div>
-        <div class="specs-grid">
-          <div class="spec-item"><span class="spec-label">Material:</span><span class="spec-value">High-Quality Aluminium Alloy</span></div>
-          <div class="spec-item"><span class="spec-label">Product Weight:</span><span class="spec-value">442 gm</span></div>
-          <div class="spec-item"><span class="spec-label">Shipping Weight:</span><span class="spec-value">492 gm</span></div>
-          <div class="spec-item"><span class="spec-label">Dimensions (LxBxH):</span><span class="spec-value">6 x 6 x 67 cm</span></div>
-          <div class="spec-item"><span class="spec-label">Leg Sections:</span><span class="spec-value">4 Sections</span></div>
-          <div class="spec-item"><span class="spec-label">Head Rotation:</span><span class="spec-value">360° 3-Way</span></div>
-          <div class="spec-item"><span class="spec-label">Screw Thread:</span><span class="spec-value">Standard 1/4"</span></div>
-          <div class="spec-item"><span class="spec-label">Country of Origin:</span><span class="spec-value">China</span></div>
-          <div class="spec-item"><span class="spec-label">GST:</span><span class="spec-value">18%</span></div>
-          <div class="spec-item"><span class="spec-label">Load Capacity:</span><span class="spec-value">Up to 3 kg</span></div>
-        </div>
-        <div class="countdown" id="countdownTimer" style="margin-top:16px; background:#0f0f23; padding:8px; border-left:4px solid #ff00cc;">⏳ Flash sale ends: 23h 59m 59s</div>
-      </div>
+    
+    <div class="highlights-grid fade-up">
+      <div class="hl-item"><i class="fas fa-arrows-alt"></i><span>360° Pan</span></div>
+      <div class="hl-item"><i class="fas fa-layer-group"></i><span>4-Section Legs</span></div>
+      <div class="hl-item"><i class="fas fa-hand-peace"></i><span>Mobile Holder</span></div>
+      <div class="hl-item"><i class="fas fa-weight-hanging"></i><span>Hook for Weight</span></div>
+      <div class="hl-item"><i class="fas fa-shield-alt"></i><span>Aluminium Alloy</span></div>
+    </div>
+    
+    <div class="keyword-cloud fade-up">
+      <span class="keyword-tag">tripod with mobile holder</span>
+      <span class="keyword-tag">4 section tripod</span>
+      <span class="keyword-tag">youtuber tripod stand</span>
+      <span class="keyword-tag">360 degree ball head tripod</span>
+      <span class="keyword-tag">aluminium alloy tripod</span>
+      <span class="keyword-tag">smartphone tripod</span>
+      <span class="keyword-tag">vlogging kit</span>
+    </div>
+  </main>
+
+  <footer>© 2026 Techforce technologies · 4-Section Tripod with Mobile Holder | 360° 3-Way Head | Aluminium Alloy | Creator's Choice</footer>
+  <div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> Free quick-release plate →</div>
+
+  <!-- BUY POPUP TALLY -->
+  <div class="buy-popup" id="buyPopup">
+    <div class="popup-box">
+      <button class="close-popup" id="closePopup">✕</button>
+      <iframe id="popupFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
   </div>
-  
-  <div class="offers-card fade-up">
-    <div><i class="fas fa-rocket"></i> <strong>🎯 Perfect For</strong></div>
-    <div class="keyword-cloud" style="margin-top:8px;">
-      <span class="keyword-tag"><i class="fab fa-youtube"></i> YouTube Vlogging</span>
-      <span class="keyword-tag"><i class="fas fa-chalkboard"></i> Online Teaching</span>
-      <span class="keyword-tag"><i class="fas fa-hiking"></i> Hiking & Camping</span>
-      <span class="keyword-tag"><i class="fas fa-camera"></i> Photography</span>
-      <span class="keyword-tag"><i class="fas fa-live"></i> Live Streaming</span>
-    </div>
-  </div>
-  
-  <div class="highlights-grid fade-up">
-    <div class="hl-item"><i class="fas fa-arrows-alt"></i><span>360° Pan</span></div>
-    <div class="hl-item"><i class="fas fa-layer-group"></i><span>4-Section Legs</span></div>
-    <div class="hl-item"><i class="fas fa-hand-peace"></i><span>Mobile Holder</span></div>
-    <div class="hl-item"><i class="fas fa-weight-hanging"></i><span>Hook for Weight</span></div>
-    <div class="hl-item"><i class="fas fa-shield-alt"></i><span>Aluminium Alloy</span></div>
-  </div>
-  
-  <div class="keyword-cloud fade-up">
-    <span class="keyword-tag">tripod with mobile holder</span>
-    <span class="keyword-tag">4 section tripod</span>
-    <span class="keyword-tag">youtuber tripod stand</span>
-    <span class="keyword-tag">360 degree ball head tripod</span>
-    <span class="keyword-tag">aluminium alloy tripod</span>
-    <span class="keyword-tag">smartphone tripod</span>
-    <span class="keyword-tag">vlogging kit</span>
-  </div>
-</main>
 
-<footer>© 2026 Techforce technologies · 4-Section Tripod with Mobile Holder | 360° 3-Way Head | Aluminium Alloy | Creator's Choice</footer>
-<div class="scroll-notification" id="scrollNotification"><i class="fas fa-gift"></i> Free quick-release plate →</div>
-
-<!-- BUY POPUP TALLY -->
-<div class="buy-popup" id="buyPopup">
-  <div class="popup-box">
-    <button class="close-popup" id="closePopup">✕</button>
-    <iframe id="popupFrame" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div>
-</div>
-
-<script>
-  // loader
-  window.addEventListener('load', () => { setTimeout(() => { const loader = document.getElementById('loader'); if(loader) loader.classList.add('hide-loader'); }, 700); });
-  
-  // sidebar menu
-  const menuToggle = document.getElementById("menuToggle");
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("overlay");
-  menuToggle.onclick = (e) => { e.stopPropagation(); menuToggle.classList.toggle("active"); sidebar.classList.toggle("active"); overlay.classList.toggle("active"); };
-  overlay.onclick = () => { menuToggle.classList.remove("active"); sidebar.classList.remove("active"); overlay.classList.remove("active"); };
-  
- // ---------- GALLERY (High quality tripod images) ----------
-const productImages = [
-  "imgasset9/imgasset9a.webp",
-  "imgasset9/imgasset9b.webp",
-  "imgasset9/imgasset9c.webp",
-  "imgasset9/imgasset9d.webp",
-  "imgasset9/imgasset9e.webp",
-  "imgasset9/imgasset9f.webp",
-  "imgasset9/imgasset9g.webp"
-];
-  let currentImageIndex = 0;
-  const mainImg = document.getElementById('mainProductImg');
-  const thumbContainer = document.getElementById('thumbnailsContainer');
-  
-  function renderThumbnails() {
-    thumbContainer.innerHTML = '';
-    productImages.forEach((src, idx) => {
-      const thumb = document.createElement('img');
-      thumb.src = src;
-      thumb.classList.add('thumb');
-      if(idx === currentImageIndex) thumb.classList.add('active');
-      thumb.addEventListener('click', () => {
-        mainImg.src = src;
-        document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
-        thumb.classList.add('active');
-        currentImageIndex = idx;
-      });
-      thumbContainer.appendChild(thumb);
+  <script>
+    // ========== LOADER ==========
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if(loader) loader.classList.add('hide-loader');
+      }, 700);
     });
-  }
-  renderThumbnails();
-  mainImg.src = productImages[0];
-  
-  // Countdown timer
-  let countdownInterval;
-  function startCountdown(secondsLeft = 86400) {
-    let remaining = secondsLeft;
-    const timerElement = document.getElementById('countdownTimer');
-    function updateTimer() {
-      const hrs = Math.floor(remaining / 3600);
-      const mins = Math.floor((remaining % 3600) / 60);
-      const secs = remaining % 60;
-      if(timerElement) timerElement.innerHTML = `⏳ Flash sale ends: ${hrs.toString().padStart(2,'0')}h ${mins.toString().padStart(2,'0')}m ${secs.toString().padStart(2,'0')}s`;
-      if(remaining <= 0) { clearInterval(countdownInterval); if(timerElement) timerElement.innerHTML = "⚡ Deal expired! Grab now ⚡"; }
-      remaining--;
-    }
-    if(countdownInterval) clearInterval(countdownInterval);
-    updateTimer();
-    countdownInterval = setInterval(updateTimer, 1000);
-  }
-  startCountdown(23*3600 + 59*60 + 59);
-  
-  // TALLY POPUP (Buy Now)
-  const buyBtn = document.getElementById('buyNowBtn');
-  const popup = document.getElementById('buyPopup');
-  const popupFrame = document.getElementById('popupFrame');
-  const closePopupBtn = document.getElementById('closePopup');
-  const TALLY_FORM_URL = "https://tally.so/r/VLvAPJ";
-  
-  function createRipple(e, btn) {
-    const ripple = document.createElement('span');
-    ripple.style.position = 'absolute';
-    ripple.style.backgroundColor = 'rgba(0,229,255,0.5)';
-    ripple.style.borderRadius = '50%';
-    ripple.style.transform = 'scale(0)';
-    ripple.style.width = ripple.style.height = '60px';
-    ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;
-    ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;
-    ripple.style.transition = 'transform 0.5s, opacity 0.5s';
-    ripple.style.pointerEvents = 'none';
-    btn.style.position = 'relative';
-    btn.style.overflow = 'hidden';
-    btn.appendChild(ripple);
-    setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);
-    setTimeout(() => ripple.remove(), 500);
-  }
-  
-  function openBuyPopup() {
-    popupFrame.src = TALLY_FORM_URL;
-    popup.classList.add('show-popup');
-    document.body.style.overflow = 'hidden';
-  }
-  function closePopupAndReset() {
-    popup.classList.remove('show-popup');
-    setTimeout(() => { if(popupFrame.src) popupFrame.src = ""; }, 300);
-    document.body.style.overflow = '';
-  }
-  
-  buyBtn.addEventListener('click', (e) => { createRipple(e, buyBtn); openBuyPopup(); });
-  closePopupBtn.addEventListener('click', closePopupAndReset);
-  popup.addEventListener('click', (e) => { if(e.target === popup) closePopupAndReset(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && popup.classList.contains('show-popup')) closePopupAndReset(); });
-  
-  // Enquire WhatsApp
-  const enquireBtn = document.getElementById('enquireBtn');
-  enquireBtn.addEventListener('click', (e) => {
-    createRipple(e, enquireBtn);
-    window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%20the%204-Section%20Tripod%20with%20Mobile%20Holder%20at%20₹299', '_blank');
-  });
-  
-  // Home & Explore
-  document.getElementById('homeBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-  document.getElementById('exploreBtn').addEventListener('click', () => document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' }));
-  document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · For bulk or wholesale inquiries, contact us on WhatsApp"));
-  
-  // scroll bottom notification (offer)
-  const scrollNotification = document.getElementById('scrollNotification');
-  let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;
-  const BOTTOM_LINK = 'https://tally.so/r/2E1yjj';
-  function handleScrollToBottom() {
-    const scrollPosition = window.scrollY + window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight;
-    if (scrollPosition >= pageHeight - 50) {
-      if (!bottomReached && !linkOpened) {
-        bottomReached = true;
-        if (!notificationShown) { scrollNotification.classList.add('show'); notificationShown = true; setTimeout(() => scrollNotification.classList.remove('show'), 4000); }
-        if (timeoutId) clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Free accessory unlocked! →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);
+
+    // ----- Floating Particles -----
+    (function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 30; i++) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.style.left = Math.random() * 100 + '%';
+        p.style.top = Math.random() * 100 + '%';
+        p.style.width = (3 + Math.random() * 8) + 'px';
+        p.style.height = p.style.width;
+        p.style.animationDuration = (20 + Math.random() * 35) + 's';
+        p.style.animationDelay = (Math.random() * 25) + 's';
+        container.appendChild(p);
       }
-    } else { if (bottomReached && !linkOpened) { bottomReached = false; if(timeoutId) clearTimeout(timeoutId); scrollNotification.classList.remove('show'); } }
-  }
-  scrollNotification.addEventListener('click', () => { if (!linkOpened) { if(timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-gift"></i> Bonus claimed!'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });
-  window.addEventListener('scroll', handleScrollToBottom);
-  
-  // fade-in observer
-  const fadeElements = document.querySelectorAll('.fade-up');
-  const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
-  fadeElements.forEach(el => observer.observe(el));
-</script>
+    })();
+
+    // ========== SIDEBAR MENU ==========
+    const menuToggle = document.getElementById("menuToggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("overlay");
+    
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menuToggle.classList.toggle("active");
+      sidebar.classList.toggle("active");
+      overlay.classList.toggle("active");
+      document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    overlay.addEventListener('click', () => {
+      menuToggle.classList.remove("active");
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+      document.body.style.overflow = '';
+    });
+    
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove("active");
+        sidebar.classList.remove("active");
+        overlay.classList.remove("active");
+        document.body.style.overflow = '';
+      });
+    });
+    
+    // ========== GALLERY ==========
+    const productImages = [
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg",
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg",
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg",
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg",
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg",
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg",
+      "https://i.ibb.co/jZwj05yP/02-c25039c1-8776-4981-ad11-5c4011c684f4.jpg"
+    ];
+    
+    let currentImageIndex = 0;
+    const mainImg = document.getElementById('mainProductImg');
+    const thumbContainer = document.getElementById('thumbnailsContainer');
+    
+    function renderThumbnails() {
+      thumbContainer.innerHTML = '';
+      productImages.forEach((src, idx) => {
+        const thumb = document.createElement('img');
+        thumb.src = src;
+        thumb.classList.add('thumb');
+        if(idx === currentImageIndex) thumb.classList.add('active');
+        thumb.addEventListener('click', () => {
+          mainImg.src = src;
+          document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
+          currentImageIndex = idx;
+        });
+        thumbContainer.appendChild(thumb);
+      });
+    }
+    renderThumbnails();
+    mainImg.src = productImages[0];
+    
+    // ========== COUNTDOWN TIMER ==========
+    let countdownInterval;
+    function startCountdown(secondsLeft = 86400) {
+      let remaining = secondsLeft;
+      const timerElement = document.getElementById('countdownTimer');
+      function updateTimer() {
+        const hrs = Math.floor(remaining / 3600);
+        const mins = Math.floor((remaining % 3600) / 60);
+        const secs = remaining % 60;
+        if(timerElement) timerElement.innerHTML = `⏳ Flash sale ends: ${hrs.toString().padStart(2,'0')}h ${mins.toString().padStart(2,'0')}m ${secs.toString().padStart(2,'0')}s`;
+        if(remaining <= 0) { clearInterval(countdownInterval); if(timerElement) timerElement.innerHTML = "⚡ Deal expired! Grab now ⚡"; }
+        remaining--;
+      }
+      if(countdownInterval) clearInterval(countdownInterval);
+      updateTimer();
+      countdownInterval = setInterval(updateTimer, 1000);
+    }
+    startCountdown(23*3600 + 59*60 + 59);
+    
+    // ========== TALLY POPUP (Buy Now) ==========
+    const buyBtn = document.getElementById('buyNowBtn');
+    const popup = document.getElementById('buyPopup');
+    const popupFrame = document.getElementById('popupFrame');
+    const closePopupBtn = document.getElementById('closePopup');
+    const TALLY_FORM_URL = "https://tally.so/r/VLvAPJ";
+    
+    function createRipple(e, btn) {
+      const ripple = document.createElement('span');
+      ripple.style.position = 'absolute';
+      ripple.style.backgroundColor = 'rgba(220, 38, 38, 0.15)';
+      ripple.style.borderRadius = '50%';
+      ripple.style.transform = 'scale(0)';
+      ripple.style.width = ripple.style.height = '60px';
+      ripple.style.left = `${e.clientX - btn.getBoundingClientRect().left - 30}px`;
+      ripple.style.top = `${e.clientY - btn.getBoundingClientRect().top - 30}px`;
+      ripple.style.transition = 'transform 0.5s, opacity 0.5s';
+      ripple.style.pointerEvents = 'none';
+      btn.style.position = 'relative';
+      btn.style.overflow = 'hidden';
+      btn.appendChild(ripple);
+      setTimeout(() => { ripple.style.transform = 'scale(6)'; ripple.style.opacity = '0'; }, 10);
+      setTimeout(() => ripple.remove(), 500);
+    }
+    
+    function openBuyPopup() {
+      popupFrame.src = TALLY_FORM_URL;
+      popup.classList.add('show-popup');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePopupAndReset() {
+      popup.classList.remove('show-popup');
+      setTimeout(() => { if(popupFrame.src) popupFrame.src = ""; }, 300);
+      document.body.style.overflow = '';
+    }
+    
+    buyBtn.addEventListener('click', (e) => { createRipple(e, buyBtn); openBuyPopup(); });
+    closePopupBtn.addEventListener('click', closePopupAndReset);
+    popup.addEventListener('click', (e) => { if(e.target === popup) closePopupAndReset(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && popup.classList.contains('show-popup')) closePopupAndReset(); });
+    
+    // ========== ENQUIRE WHATSAPP ==========
+    const enquireBtn = document.getElementById('enquireBtn');
+    enquireBtn.addEventListener('click', (e) => {
+      createRipple(e, enquireBtn);
+      window.open('https://wa.me/918528241024?text=Hello%2C%20I%20want%20to%20enquire%20about%20the%204-Section%20Tripod%20with%20Mobile%20Holder%20at%20₹299', '_blank');
+    });
+    
+    // ========== HOME & EXPLORE ==========
+    document.getElementById('homeBtn').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    document.getElementById('exploreBtn').addEventListener('click', () => document.querySelector('.highlights-grid').scrollIntoView({ behavior: 'smooth' }));
+    document.querySelector('.cart-icon').addEventListener('click', () => alert("Your cart · For bulk or wholesale inquiries, contact us on WhatsApp"));
+    
+    // ========== SCROLL NOTIFICATION ==========
+    const scrollNotification = document.getElementById('scrollNotification');
+    let bottomReached = false, timeoutId = null, notificationShown = false, linkOpened = false;
+    const BOTTOM_LINK = 'https://tally.so/r/2E1yjj';
+    function handleScrollToBottom() {
+      const scrollPosition = window.scrollY + window.innerHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      if (scrollPosition >= pageHeight - 50) {
+        if (!bottomReached && !linkOpened) {
+          bottomReached = true;
+          if (!notificationShown) { scrollNotification.classList.add('show'); notificationShown = true; setTimeout(() => scrollNotification.classList.remove('show'), 4000); }
+          if (timeoutId) clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => { if (!linkOpened) { linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-check-circle"></i> Free accessory unlocked! →'; scrollNotification.classList.add('show'); setTimeout(() => scrollNotification.classList.remove('show'), 3000); } }, 2000);
+        }
+      } else { if (bottomReached && !linkOpened) { bottomReached = false; if(timeoutId) clearTimeout(timeoutId); scrollNotification.classList.remove('show'); } }
+    }
+    scrollNotification.addEventListener('click', () => { if (!linkOpened) { if(timeoutId) clearTimeout(timeoutId); linkOpened = true; window.open(BOTTOM_LINK, '_blank'); scrollNotification.innerHTML = '<i class="fas fa-gift"></i> Bonus claimed!'; setTimeout(() => scrollNotification.classList.remove('show'), 3000); } });
+    window.addEventListener('scroll', handleScrollToBottom);
+    
+    // ========== FADE-IN OBSERVER ==========
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } }); }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
